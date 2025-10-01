@@ -64,6 +64,10 @@ export function TestimonialsGrid() {
       role: "Entrepreneur",
       image: "/female-entrepreneur.jpg",
       content:
+        "The individual coaching sessions helped me navigate the challenges of starting my own business. I gained clarity on my vision, learned to manage stress, and developed the mindset I needed to succeed. I'm now thriving as an entrepreneur.",
+      rating: 5,
+      serviceId: "individual-coaching",
+      category: "Individual Coaching",
       featured: false,
     },
     {
