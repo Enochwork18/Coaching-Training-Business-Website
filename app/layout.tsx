@@ -50,7 +50,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${lato.variable} ${montserrat.variable} antialiased`}>
-      <body className="font-sans bg-background text-foreground overflow-x-hidden">{children}</body>
+      <body className="font-lato bg-neutral-light text-text-primary overflow-x-hidden">{children}</body>
     </html>
   )
 }
