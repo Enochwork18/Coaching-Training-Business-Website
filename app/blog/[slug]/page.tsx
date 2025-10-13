@@ -33,7 +33,7 @@ async function getBlogPost(slug: string): Promise<BlogPost | null> {
     }
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
+export async function generateMetadata({ params }) {
   const { slug } = params
   const post = await getBlogPost(slug)
 
@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 }
 
-export default async function BlogPostPage({ params }: { params: { slug: string } }) {
+export default async function BlogPostPage({ params }) {
   const { slug } = params
   const post = await getBlogPost(slug)
 

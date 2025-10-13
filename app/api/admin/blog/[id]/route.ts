@@ -5,7 +5,7 @@ import { apiResponse, handleApiError } from "@/lib/api-utils";
 // GET a single post for editing
 export async function GET(
     req: NextRequest,
-    { params }: { params: { id: string } }
+    { params }
 ) {
     try {
         const posts = await db.blog.getAll();
@@ -23,7 +23,7 @@ export async function GET(
 // PUT (update) a blog post
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }
 ) {
   try {
     const body = await req.json();
@@ -42,7 +42,7 @@ export async function PUT(
 // DELETE a blog post
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }
 ) {
   try {
     const success = await db.blog.delete(params.id);

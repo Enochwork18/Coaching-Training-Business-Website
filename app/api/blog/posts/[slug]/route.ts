@@ -4,7 +4,7 @@ import { apiResponse, handleApiError } from "@/lib/api-utils";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }
 ) {
   try {
     const { slug } = params;

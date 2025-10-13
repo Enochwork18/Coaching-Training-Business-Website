@@ -1,0 +1,50 @@
+[
+  {
+    "id": "1",
+    "slug": "marriage-relationship-counseling",
+    "title": "Marriage & Relationship Counseling",
+    "category": "couples",
+    "excerpt": "Strengthen your marriage through faith-based guidance and practical strategies for lasting connection.",
+    "description": "Our marriage and relationship counseling service is designed to help couples navigate challenges, improve communication, and deepen their connection. Rooted in faith-based principles and evidence-based practices, we provide a safe and supportive space for you and your partner to explore issues, resolve conflicts, and build a stronger, more resilient partnership.",
+    "whatsIncluded": [
+      "One-on-one confidential sessions",
+      "Personalized action plans",
+      "Follow-up resources and exercises",
+      "Prayer and spiritual support",
+      "Email support between sessions"
+    ],
+    "duration": "60 minutes",
+    "price": 100,
+    "currency": "GBP",
+    "priceNGN": 50000,
+    "priceGBP": 100,
+    "priceUSD": 120,
+    "requiresPayment": true,
+    "featuredImage": "/services/marriage-counseling.jpg",
+    "published": true
+  },
+  {
+    "id": "2",
+    "slug": "parenting-coaching",
+    "title": "Parenting Coaching",
+    "category": "individual",
+    "excerpt": "Raise emotionally strong, spiritually grounded children with confidence and biblical wisdom.",
+    "description": "Parenting is one of the most rewarding and challenging callings. Our parenting coaching service equips you with the tools, strategies, and biblical wisdom to raise emotionally strong, spiritually grounded children. We offer personalized guidance to help you navigate the different stages of parenthood with confidence and grace.",
+    "whatsIncluded": [
+      "Personalized parenting strategies",
+      "Age-appropriate guidance",
+      "Resource toolkit and worksheets",
+      "Monthly check-in sessions",
+      "Private parent community access"
+    ],
+    "duration": "45 minutes",
+    "price": 80,
+    "currency": "GBP",
+    "priceNGN": 40000,
+    "priceGBP": 80,
+    "priceUSD": 100,
+    "requiresPayment": true,
+    "featuredImage": "/services/parenting-coaching.jpg",
+    "published": true
+  }
+]

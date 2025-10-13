@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -43,7 +43,11 @@ const formSchema = z.object({
   readTime: z.string().min(1, "Read time is required"),
 });
 
-export default function EditPostPage({ params }: { params: { id: string } }) {
+type PageProps = {
+    params: { id: string }
+}
+
+export default function EditPostPage({ params }: PageProps) {
   const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

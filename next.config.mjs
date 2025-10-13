@@ -1,14 +1,25 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
+  serverExternalPackages: ['nodemailer'],
   typescript: {
     ignoreBuildErrors: true,
   },
-  images: {
-    unoptimized: true,
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      // Don't resolve 'nodemailer' on the client
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        nodemailer: false,
+        crypto: false,
+        stream: false,
+        buffer: false,
+      }
+    }
+    return config
   },
 }
 
-export default nextConfig
+export default nextConfig;

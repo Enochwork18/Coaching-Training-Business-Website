@@ -1,19 +1,24 @@
 // Type definitions for the application
 
 export interface Service {
-  id: string
-  title: string
-  slug: string
-  description: string
-  longDescription: string
-  image: string
-  icon: string
-  features: string[]
-  duration?: string
-  price?: string
-  category: "individual" | "couples" | "corporate"
-  createdAt: string
-  updatedAt: string
+  id: string;
+  title: string;
+  slug: string;
+  description: string;
+  longDescription: string;
+  image: string;
+  icon: string;
+  features: string[];
+  duration?: string;
+  price?: number; // Base price
+  currency?: string; // Default currency
+  priceNGN?: number | null; // Nigerian Naira
+  priceGBP?: number | null; // British Pounds
+  priceUSD?: number | null; // US Dollars
+  requiresPayment: boolean;
+  category: "individual" | "couples" | "corporate";
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface BlogPost {
@@ -58,16 +63,42 @@ export interface GalleryItem {
 }
 
 export interface Booking {
-  id: string
-  name: string
-  email: string
-  phone: string
-  serviceId: string
-  date: string
-  time: string
-  message?: string
-  status: "pending" | "confirmed" | "cancelled"
-  createdAt: string
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  serviceId: string;
+  date: string;
+  time: string;
+  message?: string;
+  amount: number;
+  currency: string;
+  status:
+    | "pending_payment"
+    | "payment_processing"
+    | "confirmed"
+    | "completed"
+    | "cancelled";
+  paymentId: string | null;
+  createdAt: string;
+}
+
+export interface Payment {
+  id: string;
+  bookingId: string;
+  amount: number;
+  currency: "NGN" | "GBP" | "USD";
+  provider: "paystack" | "flutterwave";
+  providerReference: string;
+  providerTransactionId: string;
+  status: "pending" | "processing" | "success" | "failed" | "cancelled";
+  customerEmail: string;
+  customerPhone: string;
+  metadata: Record<string, unknown>;
+  webhookData: Record<string, unknown>;
+  createdAt: Date;
+  updatedAt: Date;
+  completedAt: Date | null;
 }
 
 export interface NewsletterSubscriber {
