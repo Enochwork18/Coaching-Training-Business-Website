@@ -7,19 +7,13 @@ import { BlogPostAuthor } from "@/components/blog/blog-post-author"
 import { RelatedPosts } from "@/components/blog/related-posts"
 
 import { BlogPost } from "@/lib/types"
-
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+import { db } from "@/lib/db";
 
 // API Integration Point: GET /api/blog/posts
 // This should fetch all blog posts for static generation
 export async function generateStaticParams() {
     try {
-        const res = await fetch(`${BASE_URL}/api/blog/posts`);
-        if (!res.ok) {
-            return [];
-        }
-        const data = await res.json();
-        const posts = data.posts as BlogPost[];
+        const posts = await db.blog.getAll();
         return posts.map((post) => ({ slug: post.slug }));
     } catch (error) {
         console.error("Failed to fetch slugs for static generation", error);
@@ -31,13 +25,8 @@ export async function generateStaticParams() {
 // This should fetch a single blog post by slug
 async function getBlogPost(slug: string): Promise<BlogPost | null> {
     try {
-        const res = await fetch(`${BASE_URL}/api/blog/posts/${slug}`, {
-            cache: 'no-store' // Ensure fresh data
-        });
-        if (!res.ok) {
-            return null;
-        }
-        return await res.json();
+        const post = await db.blog.getBySlug(slug);
+        return post || null;
     } catch (error) {
         console.error(`Failed to fetch blog post with slug ${slug}`, error);
         return null;
