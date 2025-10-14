@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { createBooking, createPayment } from '@/lib/db';
+import { createBooking, createPayment } from '@/lib/db/index';
 import { mockServices } from '@/lib/mockData';
 
 const InitializePaymentSchema = z.object({

@@ -33,29 +33,6 @@ export function FlutterwavePaymentButton({
   onSuccess: (response: any) => void
   onClose: () => void
 }) {
-  // For testing: bypass Flutterwave and call success immediately
-  const isDevelopment = process.env.NODE_ENV === 'development'
-
-  if (isDevelopment && !process.env.NEXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY) {
-    return (
-      <button
-        onClick={() => {
-          console.log('🧪 TEST MODE: Simulating payment success')
-          setTimeout(() => {
-            onSuccess({
-              transaction_id: 'test-txn-' + Date.now(),
-              tx_ref: `IB-${booking.id}-${Date.now()}`,
-              status: 'successful',
-            })
-          }, 1000)
-        }}
-        className="w-full bg-primary-green text-white py-3 px-6 rounded-lg hover:bg-opacity-90 transition-all"
-      >
-        💳 Pay with Flutterwave (Test Mode)
-      </button>
-    )
-  }
-
   const config: FlutterwaveConfig = {
     public_key: process.env.NEXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY!,
     tx_ref: `IB-${booking.id}-${Date.now()}`,

@@ -61,5 +61,26 @@
       "paidAt": "2025-10-14T16:05:25.975Z"
     },
     "completedAt": "2025-10-14T16:05:25.975Z"
+  },
+  {
+    "id": "payment-1760464932624",
+    "bookingId": "booking-1760464932620",
+    "amount": 0,
+    "currency": "NGN",
+    "status": "success",
+    "provider": "paystack",
+    "customerEmail": "test@example.com",
+    "createdAt": "2025-10-14T18:02:12.624Z",
+    "updatedAt": "2025-10-14T18:02:13.271Z",
+    "providerTransactionId": "test-txn-123",
+    "webhookData": {
+      "transactionId": "test-txn-123",
+      "reference": "booking-1760464932620",
+      "amount": 0,
+      "currency": "NGN",
+      "customerEmail": "test@example.com",
+      "paidAt": "2025-10-14T18:02:13.269Z"
+    },
+    "completedAt": "2025-10-14T18:02:13.269Z"
   }
 ]

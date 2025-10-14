@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
-import { verifyPaystackPayment } from '@/lib/payment/paystack.server'
-import { verifyFlutterwavePayment } from '@/lib/payment/flutterwave.server'
-import { updatePayment, updateBooking, getPaymentByReference, getBookingById } from '@/lib/db'
+import { verifyPaystackPayment } from '@/lib/integrations/paystack/server'
+import { verifyFlutterwavePayment } from '@/lib/integrations/flutterwave/server'
+import { updatePayment, updateBooking, getPaymentByReference, getBookingById } from '@/lib/db/index'
 import { sendBookingConfirmationEmail } from '@/app/actions/email'
 
 const VerifyPaymentSchema = z.object({

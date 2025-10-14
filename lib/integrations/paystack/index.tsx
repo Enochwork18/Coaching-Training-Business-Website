@@ -24,30 +24,6 @@ export function PaystackPaymentButton({
   onSuccess: (reference: any) => void
   onClose: () => void
 }) {
-  // For testing: bypass Paystack and call success immediately
-  const isDevelopment = process.env.NODE_ENV === 'development'
-
-  if (isDevelopment && !process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY) {
-    return (
-      <button
-        onClick={() => {
-          console.log('🧪 TEST MODE: Simulating payment success')
-          // Simulate successful payment after 1 second
-          setTimeout(() => {
-            onSuccess({
-              transaction: 'test-transaction-' + Date.now(),
-              reference: booking.id,
-              status: 'success',
-            })
-          }, 1000)
-        }}
-        className="w-full bg-deep-teal text-white py-3 px-6 rounded-lg hover:bg-opacity-90 transition-all"
-      >
-        💳 Pay with Paystack (Test Mode)
-      </button>
-    )
-  }
-
   const config = {
     reference: booking.id,
     email: booking.clientEmail,
