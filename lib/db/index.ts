@@ -1,6 +1,6 @@
 import fs from 'fs/promises';
 import path from 'path';
-import { Booking, Payment } from './types';
+import { Booking, Payment } from '../types';
 
 const bookingsPath = path.join(process.cwd(), 'data/bookings.json');
 const paymentsPath = path.join(process.cwd(), 'data/payments.json');
