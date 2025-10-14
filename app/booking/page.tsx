@@ -6,12 +6,12 @@ import dynamic from 'next/dynamic'
 
 // Dynamically import payment components
 const PaystackPaymentButton = dynamic(
-  () => import('@/lib/payment/paystack.tsx').then(mod => mod.PaystackPaymentButton),
+  () => import('@/lib/payment/paystack').then(mod => mod.PaystackPaymentButton),
   { ssr: false }
 )
 
 const FlutterwavePaymentButton = dynamic(
-  () => import('@/lib/payment/flutterwave.tsx').then(mod => mod.FlutterwavePaymentButton),
+  () => import('@/lib/payment/flutterwave').then(mod => mod.FlutterwavePaymentButton),
   { ssr: false }
 )
 

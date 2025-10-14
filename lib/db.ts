@@ -9,7 +9,8 @@ async function readData(filePath: string) {
   try {
     const data = await fs.readFile(filePath, 'utf-8');
     return JSON.parse(data);
-  } catch (error) {
+  } catch (e) {
+    const error = e as { code?: string };
     if (error.code === 'ENOENT') {
       return []; // Return empty array if file doesn't exist
     }

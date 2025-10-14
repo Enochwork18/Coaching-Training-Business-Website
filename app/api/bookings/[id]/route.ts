@@ -1,12 +1,13 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 import { getBookingById } from '@/lib/db'
 
 export async function GET(
-  request: NextRequest,
-  { params }: { params: { id: string } }
+  request: Request,
+  context: any
 ) {
   try {
-    const booking = await getBookingById(params.id)
+    const { id } = context.params;
+    const booking = await getBookingById(id)
     if (!booking) {
       return NextResponse.json({ error: 'Booking not found' }, { status: 404 })
     }

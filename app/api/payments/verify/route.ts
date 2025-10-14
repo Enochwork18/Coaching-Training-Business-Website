@@ -61,7 +61,8 @@ export async function POST(request: NextRequest) {
     }
 
     if (!verificationResult.success) {
-      console.error('❌ Verification failed:', verificationResult.error)
+      const errorMessage = 'error' in verificationResult ? verificationResult.error : 'Unknown error';
+      console.error('❌ Verification failed:', errorMessage)
       await updatePayment(payment.id, {
         status: 'failed',
         updatedAt: new Date(),
@@ -69,7 +70,7 @@ export async function POST(request: NextRequest) {
 
       return NextResponse.json({
         success: false,
-        error: verificationResult.error,
+        error: errorMessage,
       })
     }
 
