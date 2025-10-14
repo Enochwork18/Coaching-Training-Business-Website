@@ -3,7 +3,7 @@ import { mockBlogPosts } from '@/lib/mockData'
 
 export async function GET(
   request: Request,
-  context: { params: { slug: string } }
+  context: any
 ) {
   try {
     const { slug } = context.params;

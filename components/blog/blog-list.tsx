@@ -9,15 +9,6 @@ import { Button } from "@/components/ui/button"
 import { Calendar, Clock, ArrowRight } from "lucide-react"
 import { Skeleton } from "@/components/ui/skeleton"
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import { motion } from "framer-motion"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Calendar, Clock, ArrowRight } from "lucide-react"
-import { Skeleton } from "@/components/ui/skeleton"
-
 export function BlogList() {
   const [posts, setPosts] = useState<any[]>([])
   const [loading, setLoading] = useState(true)

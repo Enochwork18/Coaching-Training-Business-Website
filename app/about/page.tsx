@@ -4,7 +4,6 @@ import { AboutHero } from "@/components/about/about-hero"
 import { FounderStory } from "@/components/about/founder-story"
 import { ValuesGrid } from "@/components/about/values-grid"
 import { CredentialsSection } from "@/components/about/credentials-section"
-import { CTASection } from "@/components/home/cta-section"
 
 export const metadata = {
   title: "About | Ìbáṣepọ̀",

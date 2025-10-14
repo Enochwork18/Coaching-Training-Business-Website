@@ -4,9 +4,7 @@ import Link from "next/link"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
-import { Users, Heart, Building2, ArrowRight } from "lucide-react"
-
-import { BookOpen, Briefcase, Handshake, Heart, Mic, Users } from "lucide-react"
+import { BookOpen, Briefcase, Handshake, Heart, Mic, Users, ArrowRight } from "lucide-react"
 
 export function ServicesPreview() {
   const services = [
