@@ -4,28 +4,9 @@ import { motion } from "framer-motion"
 import { Badge } from "@/components/ui/badge"
 import { Share2, Facebook, Twitter, Linkedin } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import type { BlogPost } from "@/lib/types"
-
-interface BlogPostContentProps {
-  post: BlogPost
-}
-
 import { Calendar, Clock, User } from "lucide-react"
 
-interface BlogPostContentProps {
-  post: {
-    title: string
-    image: string
-    content: string
-    author: string
-    createdAt: string
-    readTime: number
-    category: string
-    tags: string[]
-  }
-}
-
-export function BlogPostContent({ post }: BlogPostContentProps) {
+export function BlogPostContent({ post }: { post: any }) {
   return (
     <motion.article
       initial={{ opacity: 0, y: 20 }}
@@ -38,7 +19,7 @@ export function BlogPostContent({ post }: BlogPostContentProps) {
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-charcoal text-sm mt-4">
           <div className="flex items-center gap-2">
             <User className="h-4 w-4" />
-            <span>{post.author}</span>
+            <span>{post.author.name}</span>
           </div>
           <div className="flex items-center gap-2">
             <Calendar className="h-4 w-4" />
@@ -66,7 +47,7 @@ export function BlogPostContent({ post }: BlogPostContentProps) {
       <div className="mt-12 pt-8 border-t border-charcoal/20">
         <div className="flex flex-wrap items-center gap-3">
           <span className="text-sm font-semibold text-forest-green">Tags:</span>
-          {post.tags.map((tag) => (
+          {post.tags.map((tag: any) => (
             <Badge key={tag} className="bg-deep-teal/10 text-deep-teal">{tag}</Badge>
           ))}
         </div>

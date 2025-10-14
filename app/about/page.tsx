@@ -18,7 +18,6 @@ export default function AboutPage() {
       <FounderStory />
       <ValuesGrid />
       <CredentialsSection />
-      <CTASection />
       <SiteFooter />
     </main>
   )

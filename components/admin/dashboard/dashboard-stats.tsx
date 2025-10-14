@@ -1,7 +1,7 @@
 "use client"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Briefcase, FileText, MessageSquare, Users } from "lucide-react"
+import { Briefcase, FileText, MessageSquare, Users, Calendar, Newspaper } from "lucide-react"
 
 export function DashboardStats() {
   const stats = [
