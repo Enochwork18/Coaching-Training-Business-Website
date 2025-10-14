@@ -1,23 +1,21 @@
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
-import { HeroSection } from "@/components/home/hero-section"
-import { ServicesPreview } from "@/components/home/services-preview"
-import { AboutPreview } from "@/components/home/about-preview"
-import { TestimonialsPreview } from "@/components/home/testimonials-preview"
-import { BlogPreview } from "@/components/home/blog-preview"
-import { NewsletterSection } from "@/components/home/newsletter-section"
+import { Hero } from "@/components/home/Hero"
+import { ServicesPreview } from "@/components/home/ServicesPreview"
+import { AboutSnippet } from "@/components/home/AboutSnippet"
+import { TestimonialsPreview } from "@/components/home/TestimonialsPreview"
+import { BlogPreview } from "@/components/home/BlogPreview"
+import { CTASection } from "@/components/home/CTASection"
+import { Footer } from "@/components/layout/Footer"
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-warm-neutral">
-      <SiteHeader />
-      <HeroSection />
+    <main>
+      <Hero />
       <ServicesPreview />
-      <AboutPreview />
+      <AboutSnippet />
       <TestimonialsPreview />
       <BlogPreview />
-      <NewsletterSection />
-      <SiteFooter />
+      <CTASection />
+      <Footer />
     </main>
   )
 }

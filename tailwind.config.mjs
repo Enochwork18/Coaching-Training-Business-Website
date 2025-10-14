@@ -8,20 +8,42 @@ const config = {
   theme: {
     extend: {
       colors: {
-        'primary-green': '#A8D5BA',
-        'sky-blue': '#CFEAFB',
-        'warm-neutral': '#F5F3EE',
-        'deep-teal': '#2A7F7F',
-        'forest-green': '#2D5F4F',
-        'charcoal': '#2C3E50',
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
+        primary: {
+          DEFAULT: 'hsl(var(--primary))',
+          foreground: 'hsl(var(--primary-foreground))',
+        },
+        secondary: {
+          DEFAULT: 'hsl(var(--secondary))',
+          foreground: 'hsl(var(--secondary-foreground))',
+        },
+        muted: {
+          DEFAULT: 'hsl(var(--muted))',
+          foreground: 'hsl(var(--muted-foreground))',
+        },
+        accent: {
+          DEFAULT: 'hsl(var(--accent))',
+          foreground: 'hsl(var(--accent-foreground))',
+        },
+        destructive: {
+          DEFAULT: 'hsl(var(--destructive))',
+          foreground: 'hsl(var(--destructive-foreground))',
+        },
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
       },
       fontFamily: {
-        sans: ['"Open Sans"', 'sans-serif'],
-        lato: ['Lato', 'sans-serif'],
-        montserrat: ['Montserrat', 'sans-serif'],
+        sans: ['Inter', 'sans-serif'],
+      },
+      borderRadius: {
+        lg: `var(--radius)`,
+        md: `calc(var(--radius) - 2px)`,
+        sm: `calc(var(--radius) - 4px)`,
       },
     },
   },
   plugins: [],
 }
-export default config
+export default config;
