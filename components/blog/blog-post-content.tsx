@@ -10,49 +10,65 @@ interface BlogPostContentProps {
   post: BlogPost
 }
 
+import { Calendar, Clock, User } from "lucide-react"
+
+interface BlogPostContentProps {
+  post: {
+    title: string
+    image: string
+    content: string
+    author: string
+    createdAt: string
+    readTime: number
+    category: string
+    tags: string[]
+  }
+}
+
 export function BlogPostContent({ post }: BlogPostContentProps) {
   return (
     <motion.article
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="prose prose-lg max-w-none mb-12"
+      className="prose lg:prose-xl max-w-none"
     >
+      <div className="mb-8">
+        <h1 className="font-montserrat text-4xl md:text-5xl font-bold text-forest-green">{post.title}</h1>
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-charcoal text-sm mt-4">
+          <div className="flex items-center gap-2">
+            <User className="h-4 w-4" />
+            <span>{post.author}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Calendar className="h-4 w-4" />
+            <span>{new Date(post.createdAt).toLocaleDateString()}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Clock className="h-4 w-4" />
+            <span>{post.readTime} min read</span>
+          </div>
+          <Badge className="bg-sky-blue text-deep-teal">{post.category}</Badge>
+        </div>
+      </div>
+
       {post.image && (
-        <div className="aspect-video rounded-2xl overflow-hidden mb-8">
-          <img src={post.image || "/placeholder.svg"} alt={post.title} className="w-full h-full object-cover" />
+        <div className="aspect-video rounded-2xl overflow-hidden mb-8 shadow-lg">
+          <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
         </div>
       )}
 
       <div
-        className="text-foreground leading-relaxed"
+        className="text-charcoal leading-relaxed"
         dangerouslySetInnerHTML={{ __html: post.content.replace(/\n/g, "<br />") }}
       />
 
-      <div className="mt-12 pt-8 border-t">
-        <div className="flex flex-wrap items-center gap-3 mb-6">
-          <span className="text-sm font-semibold">Tags:</span>
+      <div className="mt-12 pt-8 border-t border-charcoal/20">
+        <div className="flex flex-wrap items-center gap-3">
+          <span className="text-sm font-semibold text-forest-green">Tags:</span>
           {post.tags.map((tag) => (
-            <Badge key={tag} variant="outline">
-              {tag}
-            </Badge>
+            <Badge key={tag} className="bg-deep-teal/10 text-deep-teal">{tag}</Badge>
           ))}
-        </div>
-
-        <div className="flex items-center gap-4">
-          <span className="text-sm font-semibold flex items-center gap-2">
-            <Share2 className="h-4 w-4" />
-            Share:
-          </span>
-          <Button variant="outline" size="sm" aria-label="Share on Facebook">
-            <Facebook className="h-4 w-4" />
-          </Button>
-          <Button variant="outline" size="sm" aria-label="Share on Twitter">
-            <Twitter className="h-4 w-4" />
-          </Button>
-          <Button variant="outline" size="sm" aria-label="Share on LinkedIn">
-            <Linkedin className="h-4 w-4" />
-          </Button>
         </div>
       </div>
     </motion.article>

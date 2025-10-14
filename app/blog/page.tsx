@@ -12,12 +12,12 @@ export const metadata = {
 
 export default function BlogPage() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen bg-warm-neutral">
       <SiteHeader />
       <BlogHero />
-      <div className="py-20 md:py-32 bg-background">
+      <div className="py-20 md:py-32">
         <div className="container-custom">
-          <div className="grid lg:grid-cols-4 gap-8">
+          <div className="grid lg:grid-cols-4 gap-12">
             <div className="lg:col-span-3">
               <BlogList />
             </div>

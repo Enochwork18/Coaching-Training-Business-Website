@@ -4,18 +4,18 @@ import { HeroSection } from "@/components/home/hero-section"
 import { ServicesPreview } from "@/components/home/services-preview"
 import { AboutPreview } from "@/components/home/about-preview"
 import { TestimonialsPreview } from "@/components/home/testimonials-preview"
-import { CTASection } from "@/components/home/cta-section"
+import { BlogPreview } from "@/components/home/blog-preview"
 import { NewsletterSection } from "@/components/home/newsletter-section"
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen bg-warm-neutral">
       <SiteHeader />
       <HeroSection />
-      <AboutPreview />
       <ServicesPreview />
+      <AboutPreview />
       <TestimonialsPreview />
-      <CTASection />
+      <BlogPreview />
       <NewsletterSection />
       <SiteFooter />
     </main>

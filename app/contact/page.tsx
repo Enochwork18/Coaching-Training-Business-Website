@@ -11,10 +11,10 @@ export const metadata = {
 
 export default function ContactPage() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen bg-warm-neutral">
       <SiteHeader />
       <ContactHero />
-      <div className="py-20 md:py-32 bg-background">
+      <div className="py-20 md:py-32">
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-12">
             <ContactForm />

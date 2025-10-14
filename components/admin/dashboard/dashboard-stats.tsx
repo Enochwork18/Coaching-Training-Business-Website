@@ -4,26 +4,24 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Briefcase, FileText, MessageSquare, Users } from "lucide-react"
 
 export function DashboardStats() {
-  // API Integration Point: GET /api/admin/stats
-  // Expected response: { services: number, blogPosts: number, testimonials: number, bookings: number }
   const stats = [
-    { title: "Services", value: "6", icon: Briefcase, change: "+2 this month" },
-    { title: "Blog Posts", value: "24", icon: FileText, change: "+4 this month" },
-    { title: "Testimonials", value: "47", icon: MessageSquare, change: "+8 this month" },
-    { title: "Bookings", value: "156", icon: Users, change: "+23 this month" },
+    { title: "Bookings this month", value: "8", icon: Calendar, change: "+25%" },
+    { title: "New Subscribers this week", value: "4", icon: Users, change: "+33%" },
+    { title: "Published Blog Posts", value: "3", icon: Newspaper, change: null },
+    { title: "Pending Testimonials", value: "2", icon: MessageSquare, change: null },
   ]
 
   return (
-    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
       {stats.map((stat) => (
-        <Card key={stat.title}>
+        <Card key={stat.title} className="bg-white">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">{stat.title}</CardTitle>
-            <stat.icon className="h-4 w-4 text-muted-foreground" />
+            <CardTitle className="text-sm font-medium text-charcoal">{stat.title}</CardTitle>
+            <stat.icon className="h-4 w-4 text-deep-teal" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stat.value}</div>
-            <p className="text-xs text-muted-foreground">{stat.change}</p>
+            <div className="text-2xl font-bold text-forest-green">{stat.value}</div>
+            {stat.change && <p className="text-xs text-charcoal/70">{stat.change} from last period</p>}
           </CardContent>
         </Card>
       ))}

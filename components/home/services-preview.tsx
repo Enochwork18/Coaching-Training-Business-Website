@@ -6,30 +6,50 @@ import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 import { Users, Heart, Building2, ArrowRight } from "lucide-react"
 
+import { BookOpen, Briefcase, Handshake, Heart, Mic, Users } from "lucide-react"
+
 export function ServicesPreview() {
   const services = [
     {
-      icon: Users,
-      title: "Individual Coaching",
-      description: "Personal growth, career development, and life transitions support tailored to your unique journey.",
-      href: "/services/individual-coaching",
-    },
-    {
       icon: Heart,
-      title: "Couples Coaching",
-      description: "Strengthen your relationship, improve communication, and build a deeper connection together.",
-      href: "/services/couples-coaching",
+      title: "Marriage & Relationships",
+      description: "Strengthen your bond with faith-based guidance.",
+      href: "/services/marriage-counseling",
     },
     {
-      icon: Building2,
-      title: "Corporate Training",
-      description: "Leadership development, team building, and organizational transformation programs.",
-      href: "/services/corporate-training",
+      icon: Users,
+      title: "Parenting & Family",
+      description: "Build confident, emotionally intelligent children.",
+      href: "/services/parenting-coaching",
+    },
+    {
+      icon: Briefcase,
+      title: "Personal Development",
+      description: "Unlock your potential and find your purpose.",
+      href: "/services/personal-development",
+    },
+    {
+      icon: Handshake,
+      title: "Consultancy",
+      description: "Strategic advice for organizations and leaders.",
+      href: "/services/consultancy",
+    },
+    {
+      icon: Mic,
+      title: "Speaking Engagements",
+      description: "Inspirational talks on faith, family, and leadership.",
+      href: "/services/speaking-engagements",
+    },
+    {
+      icon: BookOpen,
+      title: "Digital Resources",
+      description: "E-books, courses, and tools for growth.",
+      href: "/services/digital-resources",
     },
   ]
 
   return (
-    <section className="py-20 md:py-32 bg-muted/50">
+    <section className="py-20 md:py-32 bg-sky-blue/20">
       <div className="container-custom">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -38,17 +58,15 @@ export function ServicesPreview() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <p className="text-primary font-semibold mb-2">Our Services</p>
-          <h2 className="font-heading text-3xl md:text-4xl font-bold text-balance mb-4">
-            Tailored Solutions for Every Journey
+          <h2 className="font-montserrat text-3xl md:text-4xl font-bold text-forest-green mb-4">
+            Our Services
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
-            Whether you're seeking personal growth, relationship enhancement, or organizational development, we have the
-            expertise to guide you.
+          <p className="text-lg text-charcoal max-w-2xl mx-auto">
+            Blending cultural wisdom and practical strategies for individuals, couples, and families.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
             <motion.div
               key={service.title}
@@ -57,31 +75,25 @@ export function ServicesPreview() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
-              <Card className="h-full hover:shadow-lg transition-shadow">
+              <Card className="h-full hover:shadow-lg transition-shadow bg-white/50 backdrop-blur-sm">
                 <CardHeader>
-                  <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                    <service.icon className="h-6 w-6 text-primary" />
+                  <div className="h-12 w-12 rounded-lg bg-deep-teal/10 flex items-center justify-center mb-4">
+                    <service.icon className="h-6 w-6 text-deep-teal" />
                   </div>
-                  <CardTitle className="text-xl">{service.title}</CardTitle>
-                  <CardDescription className="text-base">{service.description}</CardDescription>
+                  <CardTitle className="text-xl font-montserrat text-forest-green">{service.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <Button asChild variant="ghost" className="group">
+                  <p className="text-charcoal mb-4">{service.description}</p>
+                  <Button asChild variant="link" className="p-0 text-deep-teal">
                     <Link href={service.href}>
                       Learn More
-                      <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                      <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                   </Button>
                 </CardContent>
               </Card>
             </motion.div>
           ))}
-        </div>
-
-        <div className="text-center">
-          <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
-            <Link href="/services">View All Services</Link>
-          </Button>
         </div>
       </div>
     </section>

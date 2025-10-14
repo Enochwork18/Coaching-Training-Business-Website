@@ -24,5 +24,18 @@
     "createdAt": "2025-10-14T13:05:00.635Z",
     "updatedAt": "2025-10-14T13:05:01.085Z",
     "paymentId": "payment-1760447100638"
+  },
+  {
+    "id": "booking-1760457924461",
+    "clientName": "Test User",
+    "clientEmail": "test@example.com",
+    "clientPhone": "+2341234567890",
+    "serviceId": "pre-marital-coaching",
+    "preferredDate": "2025-10-14T16:05:17.984Z",
+    "message": "Test booking",
+    "status": "confirmed",
+    "createdAt": "2025-10-14T16:05:24.461Z",
+    "updatedAt": "2025-10-14T16:05:25.981Z",
+    "paymentId": "payment-1760457924466"
   }
 ]
