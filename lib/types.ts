@@ -57,17 +57,33 @@ export interface GalleryItem {
   createdAt: string
 }
 
+export interface Payment {
+  id: string;
+  bookingId: string;
+  amount: number;
+  currency: string;
+  status: 'pending' | 'success' | 'failed';
+  provider: 'paystack' | 'flutterwave';
+  providerTransactionId?: string;
+  customerEmail: string;
+  createdAt: Date;
+  updatedAt: Date;
+  completedAt?: Date;
+  webhookData?: any;
+}
+
 export interface Booking {
-  id: string
-  name: string
-  email: string
-  phone: string
-  serviceId: string
-  date: string
-  time: string
-  message?: string
-  status: "pending" | "confirmed" | "cancelled"
-  createdAt: string
+  id: string;
+  clientName: string;
+  clientEmail: string;
+  clientPhone: string;
+  serviceId: string;
+  preferredDate: Date;
+  message: string;
+  status: 'pending' | 'confirmed' | 'cancelled';
+  paymentId?: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface NewsletterSubscriber {
