@@ -1,0 +1,28 @@
+[
+  {
+    "id": "booking-1760447053446",
+    "clientName": "Test User",
+    "clientEmail": "test@example.com",
+    "clientPhone": "+2341234567890",
+    "serviceId": "pre-marital-coaching",
+    "preferredDate": "2025-10-14T13:04:13.106Z",
+    "message": "Test booking",
+    "status": "confirmed",
+    "createdAt": "2025-10-14T13:04:13.446Z",
+    "updatedAt": "2025-10-14T13:04:13.756Z",
+    "paymentId": "payment-1760447053449"
+  },
+  {
+    "id": "booking-1760447100635",
+    "clientName": "Test User",
+    "clientEmail": "test@example.com",
+    "clientPhone": "+2341234567890",
+    "serviceId": "pre-marital-coaching",
+    "preferredDate": "2025-10-14T13:04:59.936Z",
+    "message": "Test booking",
+    "status": "confirmed",
+    "createdAt": "2025-10-14T13:05:00.635Z",
+    "updatedAt": "2025-10-14T13:05:01.085Z",
+    "paymentId": "payment-1760447100638"
+  }
+]
