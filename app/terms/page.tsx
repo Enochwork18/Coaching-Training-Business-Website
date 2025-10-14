@@ -1,5 +1,5 @@
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
+import { Header } from "@/components/layout/header"
+import { Footer } from "@/components/layout/footer"
 import { LegalContent } from "@/components/legal/legal-content"
 
 export const metadata = {
@@ -10,7 +10,7 @@ export const metadata = {
 export default function TermsPage() {
   return (
     <main className="min-h-screen">
-      <SiteHeader />
+      <Header />
       <LegalContent
         title="Terms of Service"
         lastUpdated="January 1, 2024"
@@ -220,7 +220,7 @@ Address: The living room, 14 Brunswick street, Stretford, M32 8NJ
 By using our services, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service.
         `}
       />
-      <SiteFooter />
+      <Footer />
     </main>
   )
 }

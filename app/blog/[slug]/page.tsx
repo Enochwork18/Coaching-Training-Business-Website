@@ -1,7 +1,10 @@
 import { notFound } from "next/navigation"
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
+import { Header } from "@/components/layout/header"
+import { Footer } from "@/components/layout/footer"
+import { BlogPostHero } from "@/components/blog/blog-post-hero"
 import { BlogPostContent } from "@/components/blog/blog-post-content"
+import { BlogPostAuthor } from "@/components/blog/blog-post-author"
+import { RelatedPosts } from "@/components/blog/related-posts"
 
 // API Integration Point: GET /api/blog/posts
 // This should fetch all blog posts for static generation
@@ -153,8 +156,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   }
 
   return (
-    <main className="min-h-screen bg-warm-neutral">
-      <SiteHeader />
+    <main className="min-h-screen">
+      <Header />
       <div className="py-20 md:py-32">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
@@ -162,7 +165,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           </div>
         </div>
       </div>
-      <SiteFooter />
+      <Footer />
     </main>
   )
 }

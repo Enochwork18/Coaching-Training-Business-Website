@@ -30,6 +30,8 @@ export function ContactForm() {
 
     try {
       // API Integration Point: POST /api/contact
+      // Expected payload: { name, email, phone, subject, message }
+      // Expected response: { success: boolean, message: string }
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -39,60 +41,61 @@ export function ContactForm() {
       const result = await response.json()
 
       if (response.ok) {
-        setMessage({ type: "success", text: "Thank you! Your message has been sent." })
+        setMessage({ type: "success", text: "Thank you! We'll get back to you soon." })
         e.currentTarget.reset()
       } else {
-        setMessage({ type: "error", text: result.message || "An error occurred. Please try again." })
+        setMessage({ type: "error", text: result.message || "Something went wrong. Please try again." })
       }
     } catch (error) {
-      setMessage({ type: "error", text: "A network error occurred. Please try again later." })
+      setMessage({ type: "error", text: "Network error. Please try again later." })
     } finally {
       setLoading(false)
     }
   }
 
   return (
-    <Card className="bg-white/50 backdrop-blur-sm shadow-lg">
+    <Card>
       <CardHeader>
-        <CardTitle className="font-montserrat text-2xl text-forest-green">Send a Message</CardTitle>
+        <CardTitle>Send Us a Message</CardTitle>
+        <CardDescription>Fill out the form below and we'll respond within 24 hours.</CardDescription>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="name" className="text-charcoal">Name *</Label>
-            <Input id="name" name="name" required placeholder="Your Name" />
+            <Label htmlFor="name">Name *</Label>
+            <Input id="name" name="name" required placeholder="Your full name" />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="email" className="text-charcoal">Email *</Label>
-            <Input id="email" name="email" type="email" required placeholder="your.email@example.com" />
+            <Label htmlFor="email">Email *</Label>
+            <Input id="email" name="email" type="email" required placeholder="your@email.com" />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="phone" className="text-charcoal">Phone</Label>
-            <Input id="phone" name="phone" type="tel" placeholder="Your Phone Number" />
+            <Label htmlFor="phone">Phone</Label>
+            <Input id="phone" name="phone" type="tel" placeholder="+1 (234) 567-890" />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="subject" className="text-charcoal">Subject *</Label>
-            <Input id="subject" name="subject" required placeholder="Reason for your message" />
+            <Label htmlFor="subject">Subject *</Label>
+            <Input id="subject" name="subject" required placeholder="How can we help?" />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="message" className="text-charcoal">Message *</Label>
+            <Label htmlFor="message">Message *</Label>
             <Textarea
               id="message"
               name="message"
               required
-              placeholder="Please type your message here..."
+              placeholder="Tell us more about what you're looking for..."
               rows={5}
             />
           </div>
           {message && (
-            <p className={`text-sm ${message.type === "success" ? "text-green-600" : "text-red-600"}`} role="alert">
+            <p className={`text-sm ${message.type === "success" ? "text-green-600" : "text-destructive"}`} role="alert">
               {message.text}
             </p>
           )}
           <Button
             type="submit"
             disabled={loading}
-            className="w-full bg-deep-teal text-white hover:bg-deep-teal/90"
+            className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
           >
             {loading ? (
               <>
@@ -100,7 +103,7 @@ export function ContactForm() {
                 Sending...
               </>
             ) : (
-              "Submit"
+              "Send Message"
             )}
           </Button>
         </form>

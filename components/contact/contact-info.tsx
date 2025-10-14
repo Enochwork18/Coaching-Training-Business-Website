@@ -6,64 +6,79 @@ export function ContactInfo() {
     {
       icon: Mail,
       label: "Email",
-      value: "enquiries@ibasepo.org.uk",
-      href: "mailto:enquiries@ibasepo.org.uk",
+      value: "Enquiries@ibasepo.org.uk\neo.bismark@ibasepo.org.uk",
+      href: "mailto:Enquiries@ibasepo.org.uk",
     },
     {
       icon: Phone,
-      label: "Phone / WhatsApp",
-      value: "+44 7958 709238",
+      label: "Phone",
+      value: "07958 709238",
       href: "tel:+447958709238",
     },
     {
       icon: MapPin,
-      label: "Address",
-      value: "The Living Room, 14 Brunswick Street, Stretford, M32 8NJ, UK",
-      href: "https://www.google.com/maps/search/?api=1&query=The+Living+Room,+14+Brunswick+Street,+Stretford",
+      label: "Location",
+      value: "The living room\n14 Brunswick street\nStretford\nM32 8NJ",
+      href: null,
+    },
+    {
+      icon: Clock,
+      label: "Office Hours",
+      value: "Monday - Friday: 9:00 AM - 6:00 PM\nSaturday: 10:00 AM - 2:00 PM",
+      href: null,
     },
   ]
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       <div>
-        <h2 className="font-montserrat text-2xl font-bold text-forest-green mb-2">Get In Touch</h2>
-        <p className="text-charcoal">
-          We're here to answer your questions and help you on your journey.
+        <h2 className="font-heading text-2xl font-bold mb-2">Contact Information</h2>
+        <p className="text-muted-foreground">
+          Reach out through any of these channels. We're here to help you begin your transformation journey.
         </p>
       </div>
 
       <div className="space-y-4">
         {contactDetails.map((detail) => (
-          <div key={detail.label} className="flex items-start gap-4">
-            <div className="h-10 w-10 rounded-lg bg-deep-teal/10 flex items-center justify-center flex-shrink-0">
-              <detail.icon className="h-5 w-5 text-deep-teal" />
-            </div>
-            <div>
-              <p className="font-semibold font-montserrat text-forest-green">{detail.label}</p>
-              <a
-                href={detail.href}
-                className="text-charcoal hover:text-deep-teal transition-colors"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {detail.value}
-              </a>
-            </div>
-          </div>
+          <Card key={detail.label}>
+            <CardContent className="pt-6">
+              <div className="flex items-start gap-4">
+                <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <detail.icon className="h-5 w-5 text-primary" />
+                </div>
+                <div>
+                  <p className="font-semibold mb-1">{detail.label}</p>
+                  {detail.href ? (
+                    <a
+                      href={detail.href}
+                      className="text-muted-foreground hover:text-primary transition-colors whitespace-pre-line"
+                    >
+                      {detail.value}
+                    </a>
+                  ) : (
+                    <p className="text-muted-foreground whitespace-pre-line">{detail.value}</p>
+                  )}
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         ))}
       </div>
 
-      <div className="aspect-video rounded-lg overflow-hidden shadow-lg">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2374.882346613865!2d-2.3069!3d53.456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487badd29a73c3d7%3A0x8b3e8c9b3f3b1b3b!2sThe%20Living%2Ie9!4m5!3m4!1s0x487badd29a73c3d7%3A0x8b3e8c9b3f3b1b3b!8m2!3d53.456!4d-2.3069"
-          width="100%"
-          height="100%"
-          style={{ border: 0 }}
-          allowFullScreen={true}
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        ></iframe>
-      </div>
+      <Card className="bg-gradient-to-br from-brand-teal to-brand-teal-dark text-white">
+        <CardContent className="pt-6">
+          <h3 className="font-heading text-xl font-bold mb-2">Ready to Start?</h3>
+          <p className="text-white/90 mb-4">
+            Book a complimentary 30-minute consultation to discuss your goals and how we can support you.
+          </p>
+          <a
+            href="/booking"
+            className="inline-block bg-white text-primary px-6 py-2 rounded-md font-medium hover:bg-white/90 transition-colors"
+          >
+            Book Free Consultation
+          </a>
+        </CardContent>
+      </Card>
     </div>
   )
 }

@@ -1,90 +1,132 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Link from "next/link"
-import { motion } from "framer-motion"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Badge } from "@/components/ui/badge"
+import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Edit, Trash2, PlusCircle } from "lucide-react"
-import { Skeleton } from "@/components/ui/skeleton"
+import { Badge } from "@/components/ui/badge"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { Edit, Trash2, Eye } from "lucide-react"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog"
 
 export function BlogTable() {
-  const [posts, setPosts] = useState<any[]>([])
-  const [loading, setLoading] = useState(true)
+  const [deleteId, setDeleteId] = useState<string | null>(null)
 
-  useEffect(() => {
-    async function fetchPosts() {
-      try {
-        const response = await fetch("/api/blog")
-        const data = await response.json()
-        setPosts(data)
-      } catch (error) {
-        console.error("Failed to fetch blog posts:", error)
-      } finally {
-        setLoading(false)
-      }
-    }
-    fetchPosts()
-  }, [])
+  // API Integration Point: GET /api/admin/blog/posts
+  // Expected response: BlogPost[]
+  const posts = [
+    {
+      id: "1",
+      title: "5 Keys to Building Stronger Relationships",
+      category: "Relationships",
+      author: "Dr. Adebayo Okonkwo",
+      publishedAt: "2024-01-15",
+      status: "published",
+      featured: true,
+    },
+    {
+      id: "2",
+      title: "Navigating Career Transitions with Confidence",
+      category: "Career Development",
+      author: "Sarah Mitchell",
+      publishedAt: "2024-01-10",
+      status: "published",
+      featured: false,
+    },
+    {
+      id: "3",
+      title: "The Power of Emotional Intelligence",
+      category: "Leadership",
+      author: "James Rodriguez",
+      publishedAt: "2024-01-05",
+      status: "published",
+      featured: false,
+    },
+  ]
 
-  if (loading) {
-    return (
-      <div className="space-y-4">
-        <Skeleton className="h-10 w-full" />
-        <Skeleton className="h-10 w-full" />
-        <Skeleton className="h-10 w-full" />
-      </div>
-    )
+  const handleDelete = async (id: string) => {
+    // API Integration Point: DELETE /api/admin/blog/posts/:id
+    console.log("Delete post:", id)
+    setDeleteId(null)
   }
 
   return (
-    <div>
-      <div className="flex justify-end mb-4">
-        <Button asChild>
-          <Link href="/admin/blog/new">
-            <PlusCircle className="mr-2 h-4 w-4" />
-            New Post
-          </Link>
-        </Button>
-      </div>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Title</TableHead>
-            <TableHead>Category</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Created At</TableHead>
-            <TableHead>Actions</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {posts.map((post) => (
-            <TableRow key={post.id}>
-              <TableCell>{post.title}</TableCell>
-              <TableCell>{post.category}</TableCell>
-              <TableCell>
-                <Badge variant={post.published ? "default" : "outline"}>
-                  {post.published ? "Published" : "Draft"}
-                </Badge>
-              </TableCell>
-              <TableCell>{new Date(post.createdAt).toLocaleDateString()}</TableCell>
-              <TableCell>
-                <div className="flex gap-2">
-                  <Button asChild variant="outline" size="icon">
-                    <Link href={`/admin/blog/edit/${post.id}`}>
-                      <Edit className="h-4 w-4" />
-                    </Link>
-                  </Button>
-                  <Button variant="destructive" size="icon">
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
-                </div>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </div>
+    <>
+      <Card>
+        <CardContent className="p-0">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Title</TableHead>
+                <TableHead>Category</TableHead>
+                <TableHead>Author</TableHead>
+                <TableHead>Published</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead className="text-right">Actions</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {posts.map((post) => (
+                <TableRow key={post.id}>
+                  <TableCell className="font-medium">
+                    {post.title}
+                    {post.featured && <Badge className="ml-2 bg-primary text-primary-foreground">Featured</Badge>}
+                  </TableCell>
+                  <TableCell>
+                    <Badge variant="outline">{post.category}</Badge>
+                  </TableCell>
+                  <TableCell>{post.author}</TableCell>
+                  <TableCell>{new Date(post.publishedAt).toLocaleDateString()}</TableCell>
+                  <TableCell>
+                    <Badge variant={post.status === "published" ? "default" : "secondary"}>{post.status}</Badge>
+                  </TableCell>
+                  <TableCell className="text-right">
+                    <div className="flex justify-end gap-2">
+                      <Button variant="ghost" size="icon" asChild>
+                        <Link href={`/blog/${post.id}`} target="_blank">
+                          <Eye className="h-4 w-4" />
+                        </Link>
+                      </Button>
+                      <Button variant="ghost" size="icon" asChild>
+                        <Link href={`/admin/blog/${post.id}/edit`}>
+                          <Edit className="h-4 w-4" />
+                        </Link>
+                      </Button>
+                      <Button variant="ghost" size="icon" onClick={() => setDeleteId(post.id)}>
+                        <Trash2 className="h-4 w-4 text-destructive" />
+                      </Button>
+                    </div>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
+
+      <AlertDialog open={!!deleteId} onOpenChange={() => setDeleteId(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently delete the blog post.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={() => deleteId && handleDelete(deleteId)}>Delete</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </>
   )
 }

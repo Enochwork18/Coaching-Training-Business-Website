@@ -1,6 +1,14 @@
 import { NextResponse } from 'next/server'
-import { mockServices } from '@/lib/mockData'
+import { prisma } from '@/lib/prisma'
 
 export async function GET() {
-  return NextResponse.json(mockServices)
+  try {
+    const services = await prisma.service.findMany({
+      where: { published: true },
+      orderBy: { createdAt: 'desc' }
+    })
+    return NextResponse.json(services)
+  } catch (error) {
+    return NextResponse.json({ error: 'Failed to fetch services' }, { status: 500 })
+  }
 }

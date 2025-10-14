@@ -1,24 +1,24 @@
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
+import { Header } from "@/components/layout/header"
+import { Footer } from "@/components/layout/footer"
 import { AboutHero } from "@/components/about/about-hero"
-import { FounderStory } from "@/components/about/founder-story"
-import { ValuesGrid } from "@/components/about/values-grid"
-import { CredentialsSection } from "@/components/about/credentials-section"
+import { MissionVision } from "@/components/about/mission-vision"
+import { TeamSection } from "@/components/about/team-section"
+import { ApproachSection } from "@/components/about/approach-section"
 
 export const metadata = {
-  title: "About | Ìbáṣepọ̀",
-  description: "Learn about Elizabeth Omolara's mission to guide families toward peace, purpose, and legacy.",
+  title: "About Us | Ìbáṣepọ̀",
+  description: "Learn about our mission, values, and the team behind Connected Hearts Coaching & Consultancy.",
 }
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen bg-warm-neutral">
-      <SiteHeader />
+    <main className="min-h-screen">
+      <Header />
       <AboutHero />
-      <FounderStory />
-      <ValuesGrid />
-      <CredentialsSection />
-      <SiteFooter />
+      <MissionVision />
+      <ApproachSection />
+      <TeamSection />
+      <Footer />
     </main>
   )
 }

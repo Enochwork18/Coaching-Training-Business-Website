@@ -1,20 +1,22 @@
-import { Hero } from "@/components/home/Hero"
-import { ServicesPreview } from "@/components/home/ServicesPreview"
-import { AboutSnippet } from "@/components/home/AboutSnippet"
-import { TestimonialsPreview } from "@/components/home/TestimonialsPreview"
-import { BlogPreview } from "@/components/home/BlogPreview"
-import { CTASection } from "@/components/home/CTASection"
-import { Footer } from "@/components/layout/Footer"
+import { Header } from "@/components/layout/header"
+import { Footer } from "@/components/layout/footer"
+import { HeroSection } from "@/components/home/hero-section"
+import { ServicesPreview } from "@/components/home/services-preview"
+import { AboutPreview } from "@/components/home/about-preview"
+import { TestimonialsPreview } from "@/components/home/testimonials-preview"
+import { CTASection } from "@/components/home/cta-section"
+import { NewsletterSection } from "@/components/home/newsletter-section"
 
 export default function HomePage() {
   return (
-    <main>
-      <Hero />
+    <main className="min-h-screen">
+      <Header />
+      <HeroSection />
+      <AboutPreview />
       <ServicesPreview />
-      <AboutSnippet />
       <TestimonialsPreview />
-      <BlogPreview />
       <CTASection />
+      <NewsletterSection />
       <Footer />
     </main>
   )

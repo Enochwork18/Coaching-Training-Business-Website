@@ -1,5 +1,5 @@
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
+import { Header } from "@/components/layout/header"
+import { Footer } from "@/components/layout/footer"
 import { LegalContent } from "@/components/legal/legal-content"
 
 export const metadata = {
@@ -10,7 +10,7 @@ export const metadata = {
 export default function PrivacyPage() {
   return (
     <main className="min-h-screen">
-      <SiteHeader />
+      <Header />
       <LegalContent
         title="Privacy Policy"
         lastUpdated="January 1, 2024"
@@ -149,7 +149,7 @@ Address: The living room, 14 Brunswick street, Stretford, M32 8NJ
 By using our website and services, you consent to the collection, use, and disclosure of your information as described in this Privacy Policy.
         `}
       />
-      <SiteFooter />
+      <Footer />
     </main>
   )
 }

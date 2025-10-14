@@ -1,5 +1,5 @@
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
+import { Header } from "@/components/layout/header"
+import { Footer } from "@/components/layout/footer"
 import { ContactHero } from "@/components/contact/contact-hero"
 import { ContactForm } from "@/components/contact/contact-form"
 import { ContactInfo } from "@/components/contact/contact-info"
@@ -11,10 +11,10 @@ export const metadata = {
 
 export default function ContactPage() {
   return (
-    <main className="min-h-screen bg-warm-neutral">
-      <SiteHeader />
+    <main className="min-h-screen">
+      <Header />
       <ContactHero />
-      <div className="py-20 md:py-32">
+      <div className="py-20 md:py-32 bg-background-light">
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-12">
             <ContactForm />
@@ -22,7 +22,7 @@ export default function ContactPage() {
           </div>
         </div>
       </div>
-      <SiteFooter />
+      <Footer />
     </main>
   )
 }
