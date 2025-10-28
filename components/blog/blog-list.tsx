@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { Card, CardDescription, CardTitle } from "@/components/ui/card"
@@ -9,12 +9,15 @@ import { Button } from "@/components/ui/button"
 import { Calendar, Clock, ArrowRight } from "lucide-react"
 import { Skeleton } from "@/components/ui/skeleton"
 
-export function BlogList() {
+interface BlogListProps {
+  searchTerm: string
+  activeCategory: string
+}
+
+export function BlogList({ searchTerm, activeCategory }: BlogListProps) {
   const [loading] = useState(false)
 
   // API Integration Point: GET /api/blog/posts
-  // Expected response: BlogPost[]
-  // Query params: ?page=1&limit=10&category=string&search=string
   const posts = [
     {
       id: "1",
@@ -114,6 +117,15 @@ export function BlogList() {
     },
   ]
 
+  const filteredPosts = useMemo(() => {
+    const term = (searchTerm || "").toLowerCase()
+    return posts.filter((p) => {
+      const matchesCategory = activeCategory === "All" || p.category === activeCategory
+      const matchesSearch = !term || p.title.toLowerCase().includes(term) || p.excerpt.toLowerCase().includes(term)
+      return matchesCategory && matchesSearch
+    })
+  }, [searchTerm, activeCategory])
+
   if (loading) {
     return (
       <div className="space-y-6">
@@ -136,7 +148,10 @@ export function BlogList() {
 
   return (
     <div className="space-y-8">
-      {posts.map((post, index) => (
+      {filteredPosts.length === 0 && (
+        <p className="text-muted-foreground">No posts found. Try a different search or category.</p>
+      )}
+      {filteredPosts.map((post, index) => (
         <motion.div
           key={post.id}
           initial={{ opacity: 0, y: 20 }}

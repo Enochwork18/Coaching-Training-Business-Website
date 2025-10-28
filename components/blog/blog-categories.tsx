@@ -4,10 +4,15 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { NewsletterForm } from "@/components/newsletter-form"
 
-export function BlogCategories() {
+interface BlogCategoriesProps {
+  activeCategory: string
+  setActiveCategory: (value: string) => void
+}
+
+export function BlogCategories({ activeCategory, setActiveCategory }: BlogCategoriesProps) {
   // API Integration Point: GET /api/blog/categories
-  // Expected response: { name: string, count: number }[]
   const categories = [
+    { name: "All", count: 0 },
     { name: "Personal Growth", count: 12 },
     { name: "Relationships", count: 8 },
     { name: "Career Development", count: 10 },
@@ -17,18 +22,9 @@ export function BlogCategories() {
   ]
 
   const popularPosts = [
-    {
-      title: "5 Keys to Building Stronger Relationships",
-      slug: "5-keys-to-building-stronger-relationships",
-    },
-    {
-      title: "The Power of Emotional Intelligence",
-      slug: "power-of-emotional-intelligence-in-leadership",
-    },
-    {
-      title: "Mindfulness Practices for Daily Life",
-      slug: "mindfulness-practices-for-daily-life",
-    },
+    { title: "5 Keys to Building Stronger Relationships", slug: "5-keys-to-building-stronger-relationships" },
+    { title: "The Power of Emotional Intelligence", slug: "power-of-emotional-intelligence-in-leadership" },
+    { title: "Mindfulness Practices for Daily Life", slug: "mindfulness-practices-for-daily-life" },
   ]
 
   return (
@@ -42,10 +38,11 @@ export function BlogCategories() {
             {categories.map((category) => (
               <Badge
                 key={category.name}
-                variant="outline"
+                variant={activeCategory === category.name ? "default" : "outline"}
                 className="cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors"
+                onClick={() => setActiveCategory(category.name)}
               >
-                {category.name} ({category.count})
+                {category.name}{category.count ? ` (${category.count})` : ""}
               </Badge>
             ))}
           </div>

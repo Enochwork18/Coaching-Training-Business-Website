@@ -4,7 +4,12 @@ import { motion } from "framer-motion"
 import { Search } from "lucide-react"
 import { Input } from "@/components/ui/input"
 
-export function BlogHero() {
+interface BlogHeroProps {
+  searchTerm: string
+  setSearchTerm: (value: string) => void
+}
+
+export function BlogHero({ searchTerm, setSearchTerm }: BlogHeroProps) {
   return (
     <section className="relative bg-gradient-to-br from-brand-sky/30 via-brand-cream to-brand-mint/20 py-20 md:py-32">
       <div className="container-custom">
@@ -27,6 +32,8 @@ export function BlogHero() {
               placeholder="Search articles..."
               className="pl-10 h-12"
               aria-label="Search blog posts"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
         </motion.div>
