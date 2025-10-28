@@ -6,7 +6,7 @@ import Link from "next/link"
 export default function AdminServicesPage() {
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <h1 className="font-heading text-3xl font-bold mb-2">Services</h1>
           <p className="text-muted-foreground">Manage your coaching and consultancy services.</p>
@@ -14,7 +14,7 @@ export default function AdminServicesPage() {
         <Button asChild>
           <Link href="/admin/services/new">
             <Plus className="mr-2 h-4 w-4" />
-            Add Service
+            Add New Service
           </Link>
         </Button>
       </div>

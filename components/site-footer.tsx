@@ -1,8 +1,15 @@
 import Link from "next/link"
-import { Facebook, Instagram, Linkedin, Mail, Phone } from "lucide-react"
+import { Facebook, Instagram, Mail, Phone, MapPin } from "lucide-react"
 
 export function SiteFooter() {
   const currentYear = new Date().getFullYear()
+  
+  const instagramUrl = process.env.NEXT_PUBLIC_INSTAGRAM_URL || "https://www.instagram.com/adukelara?igsh=MWQ0cWx1eGtpaXdxcw=="
+  const facebookUrl = process.env.NEXT_PUBLIC_FACEBOOK_URL || "https://www.facebook.com/profile.php?id=100002866323294"
+  const businessEmail = process.env.NEXT_PUBLIC_BUSINESS_EMAIL || "enquiries@ibasepo.org.uk"
+  const businessPhone = process.env.NEXT_PUBLIC_BUSINESS_PHONE || "+447958709238"
+  const whatsappNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "447958709238"
+  const businessAddress = process.env.NEXT_PUBLIC_BUSINESS_ADDRESS || "14 Brunswick Street, Stretford, M32 8NJ, UK"
 
   return (
     <footer className="bg-muted border-t">
@@ -50,17 +57,28 @@ export function SiteFooter() {
           {/* Contact */}
           <div>
             <h4 className="font-heading text-sm font-semibold mb-4">Contact</h4>
-            <ul className="space-y-2">
-              <li className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Mail className="h-4 w-4" />
-                <a href="mailto:Enquiries@ibasepo.org.uk" className="hover:text-primary transition-colors">
-                  Enquiries@ibasepo.org.uk
+            <ul className="space-y-3">
+              <li className="flex items-start gap-2 text-sm text-muted-foreground">
+                <Mail className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                <a href={`mailto:${businessEmail}`} className="hover:text-primary transition-colors">
+                  {businessEmail}
                 </a>
               </li>
-              <li className="flex items-center gap-2 text-sm text-muted-foreground">
-                <Phone className="h-4 w-4" />
-                <a href="tel:+447958709238" className="hover:text-primary transition-colors">
-                  07958 709238
+              <li className="flex items-start gap-2 text-sm text-muted-foreground">
+                <Phone className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                <a href={`tel:${businessPhone}`} className="hover:text-primary transition-colors">
+                  {businessPhone.replace("+44", "0")}
+                </a>
+              </li>
+              <li className="flex items-start gap-2 text-sm text-muted-foreground">
+                <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0" />
+                <a 
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(businessAddress)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-primary transition-colors"
+                >
+                  {businessAddress}
                 </a>
               </li>
             </ul>
@@ -71,7 +89,7 @@ export function SiteFooter() {
             <h4 className="font-heading text-sm font-semibold mb-4">Follow Us</h4>
             <div className="flex gap-4 mb-6">
               <a
-                href="https://facebook.com"
+                href={facebookUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors"
@@ -80,22 +98,13 @@ export function SiteFooter() {
                 <Facebook className="h-5 w-5" />
               </a>
               <a
-                href="https://instagram.com"
+                href={instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors"
                 aria-label="Instagram"
               >
                 <Instagram className="h-5 w-5" />
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="h-5 w-5" />
               </a>
             </div>
             <div className="space-y-2">

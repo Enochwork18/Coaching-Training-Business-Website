@@ -1,6 +1,10 @@
+"use client"
+
 import type React from "react"
+import { useEffect } from "react"
 import { AdminSidebar } from "@/components/admin/admin-sidebar"
 import { AdminHeader } from "@/components/admin/admin-header"
+import { requireAdmin } from "@/lib/auth"
 
 export const metadata = {
   title: "Admin Dashboard | Ìbáṣepọ̀",
@@ -8,6 +12,10 @@ export const metadata = {
 }
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
+  useEffect(() => {
+    requireAdmin()
+  }, [])
+
   return (
     <div className="min-h-screen bg-muted/30">
       <AdminHeader />

@@ -27,6 +27,7 @@ export function ServicesTable() {
     {
       id: "1",
       title: "Individual Coaching",
+      slug: "individual-coaching",
       category: "individual",
       price: "$150/session",
       status: "active",
@@ -34,6 +35,7 @@ export function ServicesTable() {
     {
       id: "2",
       title: "Couples Coaching",
+      slug: "couples-coaching",
       category: "couples",
       price: "$200/session",
       status: "active",
@@ -41,6 +43,7 @@ export function ServicesTable() {
     {
       id: "3",
       title: "Corporate Training",
+      slug: "corporate-training",
       category: "corporate",
       price: "Custom",
       status: "active",
@@ -81,12 +84,12 @@ export function ServicesTable() {
                   <TableCell className="text-right">
                     <div className="flex justify-end gap-2">
                       <Button variant="ghost" size="icon" asChild>
-                        <Link href={`/services/${service.id}`} target="_blank">
+                        <Link href={`/services/${service.slug}`} target="_blank">
                           <Eye className="h-4 w-4" />
                         </Link>
                       </Button>
                       <Button variant="ghost" size="icon" asChild>
-                        <Link href={`/admin/services/${service.id}/edit`}>
+                        <Link href={`/admin/services/edit?id=${service.id}`}>
                           <Edit className="h-4 w-4" />
                         </Link>
                       </Button>

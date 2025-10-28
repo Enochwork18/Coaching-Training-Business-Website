@@ -6,6 +6,7 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Loader2 } from "lucide-react"
+import { subscribeToNewsletter } from "@/lib/api"
 
 export function NewsletterForm() {
   const [email, setEmail] = useState("")
@@ -18,22 +19,12 @@ export function NewsletterForm() {
     setMessage(null)
 
     try {
-      // API Integration Point: POST /api/newsletter
-      // Expected payload: { email: string }
-      // Expected response: { success: boolean, message: string }
-      const response = await fetch("/api/newsletter", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      })
-
-      const data = await response.json()
-
-      if (response.ok) {
-        setMessage({ type: "success", text: "Thank you for subscribing!" })
+      const res = await subscribeToNewsletter(email)
+      if (res.success) {
+        setMessage({ type: "success", text: res.message || "Thank you for subscribing!" })
         setEmail("")
       } else {
-        setMessage({ type: "error", text: data.message || "Something went wrong. Please try again." })
+        setMessage({ type: "error", text: res.message || "Something went wrong. Please try again." })
       }
     } catch (error) {
       setMessage({ type: "error", text: "Network error. Please try again later." })

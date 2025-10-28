@@ -1,9 +1,9 @@
 "use client"
 
 import Link from "next/link"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card" 
 import { Button } from "@/components/ui/button"
-import { Plus } from "lucide-react"
+import { Briefcase, FileText, Star, Upload } from "lucide-react"
 
 export function QuickActions() {
   const actions = [
@@ -23,7 +23,7 @@ export function QuickActions() {
         {actions.map((action) => (
           <Button key={action.label} asChild variant="outline" className="w-full justify-start bg-transparent">
             <Link href={action.href}>
-              <Plus className="mr-2 h-4 w-4" />
+              <action.icon className="mr-2 h-4 w-4" />
               {action.label}
             </Link>
           </Button>

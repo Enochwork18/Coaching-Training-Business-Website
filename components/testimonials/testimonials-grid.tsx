@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -11,10 +11,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 export function TestimonialsGrid() {
   const [loading] = useState(false)
   const [filter, setFilter] = useState("all")
-
-  useEffect(() => {
-    console.log("TestimonialsGrid mounted. Total testimonials:", testimonials.length)
-  }, [])
 
   // API Integration Point: GET /api/testimonials
   // Query params: ?category=string&featured=boolean
@@ -64,6 +60,10 @@ export function TestimonialsGrid() {
       role: "Entrepreneur",
       image: "/female-entrepreneur.jpg",
       content:
+        "The life purpose coaching helped me discover what truly matters to me. I've since pivoted my business to align with my values, and I've never been happier or more fulfilled. The investment in coaching has paid dividends in every area of my life.",
+      rating: 5,
+      serviceId: "life-purpose-coaching",
+      category: "Individual Coaching",
       featured: false,
     },
     {

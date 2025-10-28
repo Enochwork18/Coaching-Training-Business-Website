@@ -10,9 +10,10 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Heart, Loader2 } from "lucide-react"
+import { Heart, Loader2, Shield } from "lucide-react"
+import { loginAdmin } from "@/lib/api"
+import { saveAuth } from "@/lib/auth"
 
-// Mock authentication - replace with real auth
 export default function AdminLoginPage() {
   const router = useRouter()
   const [email, setEmail] = useState("")
@@ -25,22 +26,24 @@ export default function AdminLoginPage() {
     setError("")
     setIsLoading(true)
 
-    // Simulate API call delay
-    await new Promise((resolve) => setTimeout(resolve, 1000))
+    try {
+      const response = await loginAdmin({ email, password })
 
-    // Mock authentication logic
-    // TODO: Replace with real API call to POST /api/admin/login
-    if (email === "admin@ibasepo.org.uk" && password === "admin123") {
-      // Store mock JWT token
-      localStorage.setItem("adminToken", "mock-jwt-token")
-      localStorage.setItem("adminRole", "ADMIN")
-      router.push("/admin/dashboard")
-    } else if (email === "editor@ibasepo.org.uk" && password === "editor123") {
-      localStorage.setItem("adminToken", "mock-jwt-token")
-      localStorage.setItem("adminRole", "EDITOR")
-      router.push("/admin/dashboard")
-    } else {
-      setError("Invalid email or password")
+      if (response.success && response.token && response.user) {
+        if (response.user.role !== 'admin') {
+          setError("Access denied. Admin privileges required.")
+          setIsLoading(false)
+          return
+        }
+        
+        saveAuth(response.token, response.user)
+        router.push("/admin/dashboard")
+      } else {
+        setError(response.message || "Invalid email or password")
+        setIsLoading(false)
+      }
+    } catch (err) {
+      setError("An error occurred. Please try again.")
       setIsLoading(false)
     }
   }

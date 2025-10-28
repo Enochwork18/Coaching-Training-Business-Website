@@ -1,8 +1,8 @@
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { BookingHero } from "@/components/booking/booking-hero"
-import { BookingCalendly } from "@/components/booking/booking-calendly"
 import { BookingInfo } from "@/components/booking/booking-info"
+import { BookingSteps } from "@/components/booking/booking-steps"
 
 export const metadata = {
   title: "Book a Session | Ìbáṣepọ̀",
@@ -18,7 +18,7 @@ export default function BookingPage() {
         <div className="container-custom">
           <div className="grid lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2">
-              <BookingCalendly />
+              <BookingSteps />
             </div>
             <aside className="lg:col-span-1">
               <BookingInfo />

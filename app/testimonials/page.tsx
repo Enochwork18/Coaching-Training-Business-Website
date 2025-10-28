@@ -3,6 +3,7 @@ import { SiteFooter } from "@/components/site-footer"
 import { TestimonialsHero } from "@/components/testimonials/testimonials-hero"
 import { TestimonialsGrid } from "@/components/testimonials/testimonials-grid"
 import { TestimonialsCTA } from "@/components/testimonials/testimonials-cta"
+import { TestimonialSubmit } from "@/components/testimonials/testimonial-submit"
 
 export const metadata = {
   title: "Testimonials | Ìbáṣepọ̀",
@@ -15,6 +16,11 @@ export default function TestimonialsPage() {
       <SiteHeader />
       <TestimonialsHero />
       <TestimonialsGrid />
+      <section className="py-16 bg-muted/30">
+        <div className="container-custom max-w-3xl">
+          <TestimonialSubmit />
+        </div>
+      </section>
       <TestimonialsCTA />
       <SiteFooter />
     </main>

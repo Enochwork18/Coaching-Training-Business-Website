@@ -49,8 +49,10 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${lato.variable} ${montserrat.variable} antialiased`}>
-      <body className="font-sans bg-background text-foreground overflow-x-hidden">{children}</body>
+    <html lang="en" className={`${lato.variable} ${montserrat.variable} antialiased`} suppressHydrationWarning>
+      <body className="font-sans bg-background text-foreground overflow-x-hidden" suppressHydrationWarning>
+        {children}
+      </body>
     </html>
   )
 }

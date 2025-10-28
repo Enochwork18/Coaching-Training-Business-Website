@@ -97,7 +97,7 @@ export function BlogTable() {
                         </Link>
                       </Button>
                       <Button variant="ghost" size="icon" asChild>
-                        <Link href={`/admin/blog/${post.id}/edit`}>
+                        <Link href={`/admin/blog/edit?id=${post.id}`}>
                           <Edit className="h-4 w-4" />
                         </Link>
                       </Button>

@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
+import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog"
 import { X } from "lucide-react"
@@ -107,10 +108,12 @@ export function GalleryGrid() {
               onClick={() => setSelectedImage(item)}
             >
               <div className="relative aspect-square rounded-lg overflow-hidden">
-                <img
+                <Image
                   src={item.image || "/placeholder.svg"}
                   alt={item.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="object-cover group-hover:scale-110 transition-transform duration-300"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
                   <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
@@ -132,17 +135,19 @@ export function GalleryGrid() {
             <DialogDescription className="sr-only">{selectedImage?.description}</DialogDescription>
             {selectedImage && (
               <div className="relative">
-                <button
+                <button type="button"
                   onClick={() => setSelectedImage(null)}
                   className="absolute -top-2 -right-2 bg-background rounded-full p-2 shadow-lg hover:bg-muted transition-colors z-10"
                   aria-label="Close"
                 >
                   <X className="h-4 w-4" />
                 </button>
-                <img
+                <Image
                   src={selectedImage.image || "/placeholder.svg"}
                   alt={selectedImage.title}
-                  className="w-full rounded-lg"
+                  width={1024}
+                  height={1024}
+                  className="w-full h-auto rounded-lg"
                 />
                 <div className="mt-4">
                   <h3 className="font-heading text-2xl font-bold mb-2">{selectedImage.title}</h3>
