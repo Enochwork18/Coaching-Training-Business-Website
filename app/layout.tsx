@@ -2,6 +2,8 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Lato, Montserrat } from "next/font/google"
 import "./globals.css"
+import { schemas as seoSchemas } from "@/lib/seo/schemas"
+import { safeSerialize } from "@/lib/seo/serialize"
 
 const lato = Lato({
   subsets: ["latin"],
@@ -57,9 +59,6 @@ export default function RootLayout({
     process.env.NEXT_PUBLIC_FACEBOOK_URL,
   ].filter(Boolean) as string[]
   const businessAddress = (process.env.NEXT_PUBLIC_BUSINESS_ADDRESS || "14 Brunswick Street, Stretford, M32 8NJ, UK")
-
-import { schemas as seoSchemas } from "@/lib/seo/schemas"
-import { safeSerialize } from "@/lib/seo/serialize"
 
   return (
     <html lang="en" className={`${lato.variable} ${montserrat.variable} antialiased`} suppressHydrationWarning>
