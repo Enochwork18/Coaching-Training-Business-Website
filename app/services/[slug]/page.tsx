@@ -4,6 +4,7 @@ import { SiteFooter } from "@/components/site-footer"
 import { ServiceDetailHero } from "@/components/services/service-detail-hero"
 import { ServiceDetailContent } from "@/components/services/service-detail-content"
 import { ServiceCTA } from "@/components/services/service-cta"
+import { StructuredData, schemas } from "@/components/seo/structured-data"
 
 // API Integration Point: GET /api/services
 // This should fetch all services for static generation
@@ -79,9 +80,19 @@ export default async function ServiceDetailPage({ params }: { params: { slug: st
     notFound()
   }
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://ibasepo.org.uk"
+  const url = `${siteUrl}/services/${service.slug}`
   return (
     <main className="min-h-screen">
       <SiteHeader />
+      <StructuredData
+        data={schemas.service({
+          name: service.title,
+          description: service.description,
+          category: service.category,
+          url,
+        })}
+      />
       <ServiceDetailHero service={service} />
       <ServiceDetailContent service={service} />
       <ServiceCTA />

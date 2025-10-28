@@ -5,6 +5,7 @@ import { BlogPostHero } from "@/components/blog/blog-post-hero"
 import { BlogPostContent } from "@/components/blog/blog-post-content"
 import { BlogPostAuthor } from "@/components/blog/blog-post-author"
 import { RelatedPosts } from "@/components/blog/related-posts"
+import { StructuredData, schemas } from "@/components/seo/structured-data"
 
 // API Integration Point: GET /api/blog/posts
 // This should fetch all blog posts for static generation
@@ -153,9 +154,21 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
     notFound()
   }
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://ibasepo.org.uk"
+  const url = `${siteUrl}/blog/${post.slug}`
   return (
     <main className="min-h-screen">
       <SiteHeader />
+      <StructuredData
+        data={schemas.blogPosting({
+          headline: post.title,
+          image: post.image,
+          authorName: post.author?.name || "",
+          datePublished: post.publishedAt,
+          description: post.excerpt,
+          url,
+        })}
+      />
       <BlogPostHero post={post} />
       <div className="py-20 md:py-32 bg-background">
         <div className="container-custom">
