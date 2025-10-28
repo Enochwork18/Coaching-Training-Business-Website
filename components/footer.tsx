@@ -1,6 +1,6 @@
 "use client"
 import { motion } from "framer-motion"
-import { Instagram, Twitter, Facebook, ArrowUpRight } from "lucide-react"
+import { Instagram, Facebook, ArrowUpRight } from "lucide-react"
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
@@ -30,9 +30,8 @@ export function Footer() {
   }
 
   const socialLinks = [
-    { name: "Instagram", icon: Instagram, href: "#" },
-    { name: "Twitter", icon: Twitter, href: "#" },
-    { name: "Facebook", icon: Facebook, href: "#" },
+    { name: "Instagram", icon: Instagram, href: "https://www.instagram.com/adukelara?igsh=MWQ0cWx1eGtpaXdxcw==" },
+    { name: "Facebook", icon: Facebook, href: "https://www.facebook.com/profile.php?id=100002866323294" },
   ]
 
   return (
@@ -58,9 +57,12 @@ export function Footer() {
                   <motion.a
                     key={social.name}
                     href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-10 h-10 bg-white rounded-full flex items-center justify-center text-neutral-600 hover:text-neutral-900 hover:bg-neutral-100 transition-all duration-200"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
+                    aria-label={social.name}
                   >
                     <social.icon size={18} />
                     <span className="sr-only">{social.name}</span>
