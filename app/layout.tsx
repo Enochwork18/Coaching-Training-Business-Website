@@ -58,23 +58,26 @@ export default function RootLayout({
   ].filter(Boolean) as string[]
   const businessAddress = (process.env.NEXT_PUBLIC_BUSINESS_ADDRESS || "14 Brunswick Street, Stretford, M32 8NJ, UK")
 
-  // Lazy import to avoid SSR mismatches
-  const Structured = require("@/components/seo/structured-data") as typeof import("@/components/seo/structured-data")
+import { schemas as seoSchemas } from "@/lib/seo/schemas"
+import { safeSerialize } from "@/lib/seo/serialize"
 
   return (
     <html lang="en" className={`${lato.variable} ${montserrat.variable} antialiased`} suppressHydrationWarning>
       <body className="font-sans bg-background text-foreground overflow-x-hidden" suppressHydrationWarning>
-        <Structured.StructuredData
-          data={[
-            Structured.schemas.organization({ name: siteName, url: siteUrl, logo: orgLogo, sameAs }),
-            Structured.schemas.localBusiness({
-              name: siteName,
-              url: siteUrl,
-              telephone: businessPhone,
-              address: { streetAddress: businessAddress },
-              image: orgLogo,
-            }),
-          ]}
+        {/* Structured data scripts rendered server-side to avoid client import in layout */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: safeSerialize(seoSchemas.organization({ name: siteName, url: siteUrl, logo: orgLogo, sameAs })) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: safeSerialize(seoSchemas.localBusiness({
+            name: siteName,
+            url: siteUrl,
+            telephone: businessPhone,
+            address: { streetAddress: businessAddress },
+            image: orgLogo,
+          })) }}
         />
         {children}
       </body>

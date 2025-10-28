@@ -4,7 +4,8 @@ import { SiteFooter } from "@/components/site-footer"
 import { ServiceDetailHero } from "@/components/services/service-detail-hero"
 import { ServiceDetailContent } from "@/components/services/service-detail-content"
 import { ServiceCTA } from "@/components/services/service-cta"
-import { StructuredData, schemas } from "@/components/seo/structured-data"
+import { StructuredData } from "@/components/seo/structured-data"
+import { schemas } from "@/lib/seo/schemas"
 
 // API Integration Point: GET /api/services
 // This should fetch all services for static generation

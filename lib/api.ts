@@ -401,3 +401,19 @@ export async function deleteBlogPost(id: string): Promise<{ success: boolean }> 
   await mockDelay()
   return { success: true }
 }
+
+// Convenience mock: fetch a single blog post by id for the admin editor
+export async function getBlogPostById(id: string): Promise<any | null> {
+  await mockDelay()
+  return {
+    id,
+    title: 'Sample Blog Post',
+    slug: 'sample-blog-post',
+    excerpt: 'This is a sample excerpt',
+    content: '<p>Sample content</p>',
+    category: 'Relationships',
+    tags: ['sample'],
+    image: '/placeholder.jpg',
+    featured: false,
+  }
+}

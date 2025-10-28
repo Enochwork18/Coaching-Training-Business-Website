@@ -5,7 +5,8 @@ import { BlogPostHero } from "@/components/blog/blog-post-hero"
 import { BlogPostContent } from "@/components/blog/blog-post-content"
 import { BlogPostAuthor } from "@/components/blog/blog-post-author"
 import { RelatedPosts } from "@/components/blog/related-posts"
-import { StructuredData, schemas } from "@/components/seo/structured-data"
+import { StructuredData } from "@/components/seo/structured-data"
+import { schemas } from "@/lib/seo/schemas"
 
 // API Integration Point: GET /api/blog/posts
 // This should fetch all blog posts for static generation
