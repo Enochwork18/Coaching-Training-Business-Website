@@ -6,11 +6,6 @@ import { AdminSidebar } from "@/components/admin/admin-sidebar"
 import { AdminHeader } from "@/components/admin/admin-header"
 import { requireAdmin } from "@/lib/auth"
 
-export const metadata = {
-  title: "Admin Dashboard | Ìbáṣepọ̀",
-  description: "Manage your coaching business content and data.",
-}
-
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     requireAdmin()

@@ -7,10 +7,10 @@ import { Briefcase, FileText, Star, Upload } from "lucide-react"
 
 export function QuickActions() {
   const actions = [
-    { label: "Add Service", href: "/admin/services/new" },
-    { label: "Write Blog Post", href: "/admin/blog/new" },
-    { label: "Add Testimonial", href: "/admin/testimonials/new" },
-    { label: "Upload to Gallery", href: "/admin/gallery/new" },
+    { label: "Add Service", href: "/admin/services/new", icon: Briefcase },
+    { label: "Write Blog Post", href: "/admin/blog/new", icon: FileText },
+    { label: "Add Testimonial", href: "/admin/testimonials/new", icon: Star },
+    { label: "Upload to Gallery", href: "/admin/gallery/new", icon: Upload },
   ]
 
   return (

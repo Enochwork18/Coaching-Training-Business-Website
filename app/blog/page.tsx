@@ -7,12 +7,6 @@ import { BlogHero } from "@/components/blog/blog-hero"
 import { BlogList } from "@/components/blog/blog-list"
 import { BlogCategories } from "@/components/blog/blog-categories"
 
-export const metadata = {
-  title: "Blog | Ìbáṣepọ̀",
-  description:
-    "Insights, tips, and resources on personal growth, relationships, leadership, and organizational development.",
-}
-
 export default function BlogPage() {
   const [searchTerm, setSearchTerm] = useState("")
   const [activeCategory, setActiveCategory] = useState("All")

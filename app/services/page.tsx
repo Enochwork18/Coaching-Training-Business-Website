@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
@@ -8,6 +8,7 @@ import { ServicesHero } from "@/components/services/services-hero"
 import { ServicesList } from "@/components/services/services-list"
 import { ProcessSection } from "@/components/services/process-section"
 import { useDebounce } from "@/hooks/use-debounce"
+import { Loader2 } from "lucide-react"
 
 // Mock data - this would typically come from an API
 const allServices = [
@@ -21,7 +22,7 @@ const allServices = [
     { id: "8", title: "Workshops", slug: "workshops", category: "Workshops", excerpt: "Interactive group sessions on various topics.", image: "/professional-coach-in-consultation--warm-office-se.jpg" },
 ]
 
-export default function ServicesPage() {
+function ServicesContent() {
   const searchParams = useSearchParams()
   const initialCategory = searchParams.get("category") || "All"
 
@@ -67,5 +68,17 @@ export default function ServicesPage() {
       <ProcessSection />
       <SiteFooter />
     </main>
+  )
+}
+
+export default function ServicesPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    }>
+      <ServicesContent />
+    </Suspense>
   )
 }
