@@ -48,9 +48,34 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://ibasepo.org.uk"
+  const siteName = process.env.NEXT_PUBLIC_SITE_NAME || "Ìbáṣepọ̀ — Connected Hearts Coaching & Consultancy"
+  const businessPhone = process.env.NEXT_PUBLIC_BUSINESS_PHONE || "+447958709238"
+  const orgLogo = "/logo.png"
+  const sameAs = [
+    process.env.NEXT_PUBLIC_INSTAGRAM_URL,
+    process.env.NEXT_PUBLIC_FACEBOOK_URL,
+  ].filter(Boolean) as string[]
+  const businessAddress = (process.env.NEXT_PUBLIC_BUSINESS_ADDRESS || "14 Brunswick Street, Stretford, M32 8NJ, UK")
+
+  // Lazy import to avoid SSR mismatches
+  const Structured = require("@/components/seo/structured-data") as typeof import("@/components/seo/structured-data")
+
   return (
     <html lang="en" className={`${lato.variable} ${montserrat.variable} antialiased`} suppressHydrationWarning>
       <body className="font-sans bg-background text-foreground overflow-x-hidden" suppressHydrationWarning>
+        <Structured.StructuredData
+          data={[
+            Structured.schemas.organization({ name: siteName, url: siteUrl, logo: orgLogo, sameAs }),
+            Structured.schemas.localBusiness({
+              name: siteName,
+              url: siteUrl,
+              telephone: businessPhone,
+              address: { streetAddress: businessAddress },
+              image: orgLogo,
+            }),
+          ]}
+        />
         {children}
       </body>
     </html>
