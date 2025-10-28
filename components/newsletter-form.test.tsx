@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor, act } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { NewsletterForm } from './newsletter-form'
 import { subscribeToNewsletter } from '@/lib/api'
@@ -25,6 +25,20 @@ jest.mock('@/components/newsletter/newsletter-consent-modal', () => ({
     </div>
   ),
 }))
+
+const actType = async (user: ReturnType<typeof userEvent.setup>, element: Element | Node, text: string) => {
+  await act(async () => {
+    // @ts-ignore
+    await user.type(element, text)
+  })
+}
+
+const actClick = async (user: ReturnType<typeof userEvent.setup>, element: Element | Node) => {
+  await act(async () => {
+    // @ts-ignore
+    await user.click(element)
+  })
+}
 
 describe('NewsletterForm', () => {
   const mockSubscribeToNewsletter = subscribeToNewsletter as jest.MockedFunction<typeof subscribeToNewsletter>
@@ -63,10 +77,10 @@ describe('NewsletterForm', () => {
       const submitButton = screen.getByRole('button', { name: /subscribe/i })
       
       // Type email
-      await user.type(emailInput, 'test@example.com')
+await actType(user, emailInput, 'test@example.com')
       
       // Submit form
-      await user.click(submitButton)
+await actClick(user, submitButton)
       
       // Modal should be open
       const modal = screen.getByTestId('consent-modal')
@@ -80,8 +94,8 @@ describe('NewsletterForm', () => {
       const emailInput = screen.getByLabelText(/email address/i)
       const submitButton = screen.getByRole('button', { name: /subscribe/i })
       
-      await user.type(emailInput, 'test@example.com')
-      await user.click(submitButton)
+await actType(user, emailInput, 'test@example.com')
+await actClick(user, submitButton)
       
       // API should not be called yet
       expect(mockSubscribeToNewsletter).not.toHaveBeenCalled()
@@ -100,12 +114,12 @@ describe('NewsletterForm', () => {
       const submitButton = screen.getByRole('button', { name: /subscribe/i })
       
       // Type email and submit
-      await user.type(emailInput, 'test@example.com')
-      await user.click(submitButton)
+await actType(user, emailInput, 'test@example.com')
+await actClick(user, submitButton)
       
       // Confirm in modal
       const confirmButton = screen.getByTestId('modal-confirm')
-      await user.click(confirmButton)
+await actClick(user, confirmButton)
       
       // API should be called with correct email
       await waitFor(() => {
@@ -126,9 +140,9 @@ describe('NewsletterForm', () => {
       render(<NewsletterForm />)
       
       const emailInput = screen.getByLabelText(/email address/i)
-      await user.type(emailInput, 'test@example.com')
-      await user.click(screen.getByRole('button', { name: /subscribe/i }))
-      await user.click(screen.getByTestId('modal-confirm'))
+await actType(user, emailInput, 'test@example.com')
+await actClick(user, screen.getByRole('button', { name: /subscribe/i }))
+await actClick(user, screen.getByTestId('modal-confirm'))
       
       await waitFor(() => {
         expect(screen.getByRole('alert')).toHaveTextContent('Thank you for subscribing!')
@@ -145,9 +159,9 @@ describe('NewsletterForm', () => {
       render(<NewsletterForm />)
       
       const emailInput = screen.getByLabelText(/email address/i) as HTMLInputElement
-      await user.type(emailInput, 'test@example.com')
-      await user.click(screen.getByRole('button', { name: /subscribe/i }))
-      await user.click(screen.getByTestId('modal-confirm'))
+await actType(user, emailInput, 'test@example.com')
+await actClick(user, screen.getByRole('button', { name: /subscribe/i }))
+await actClick(user, screen.getByTestId('modal-confirm'))
       
       await waitFor(() => {
         expect(emailInput.value).toBe('')
@@ -163,9 +177,9 @@ describe('NewsletterForm', () => {
       
       render(<NewsletterForm />)
       
-      await user.type(screen.getByLabelText(/email address/i), 'test@example.com')
-      await user.click(screen.getByRole('button', { name: /subscribe/i }))
-      await user.click(screen.getByTestId('modal-confirm'))
+await actType(user, screen.getByLabelText(/email address/i), 'test@example.com')
+await actClick(user, screen.getByRole('button', { name: /subscribe/i }))
+await actClick(user, screen.getByTestId('modal-confirm'))
       
       await waitFor(() => {
         const modal = screen.getByTestId('consent-modal')
@@ -184,9 +198,9 @@ describe('NewsletterForm', () => {
       
       render(<NewsletterForm />)
       
-      await user.type(screen.getByLabelText(/email address/i), 'test@example.com')
-      await user.click(screen.getByRole('button', { name: /subscribe/i }))
-      await user.click(screen.getByTestId('modal-confirm'))
+await actType(user, screen.getByLabelText(/email address/i), 'test@example.com')
+await actClick(user, screen.getByRole('button', { name: /subscribe/i }))
+await actClick(user, screen.getByTestId('modal-confirm'))
       
       await waitFor(() => {
         expect(screen.getByRole('alert')).toHaveTextContent('Email already subscribed')
@@ -199,9 +213,9 @@ describe('NewsletterForm', () => {
       
       render(<NewsletterForm />)
       
-      await user.type(screen.getByLabelText(/email address/i), 'test@example.com')
-      await user.click(screen.getByRole('button', { name: /subscribe/i }))
-      await user.click(screen.getByTestId('modal-confirm'))
+await actType(user, screen.getByLabelText(/email address/i), 'test@example.com')
+await actClick(user, screen.getByRole('button', { name: /subscribe/i }))
+await actClick(user, screen.getByTestId('modal-confirm'))
       
       await waitFor(() => {
         expect(screen.getByRole('alert')).toHaveTextContent('Network error. Please try again later.')
@@ -218,9 +232,9 @@ describe('NewsletterForm', () => {
       render(<NewsletterForm />)
       
       const emailInput = screen.getByLabelText(/email address/i) as HTMLInputElement
-      await user.type(emailInput, 'test@example.com')
-      await user.click(screen.getByRole('button', { name: /subscribe/i }))
-      await user.click(screen.getByTestId('modal-confirm'))
+await actType(user, emailInput, 'test@example.com')
+await actClick(user, screen.getByRole('button', { name: /subscribe/i }))
+await actClick(user, screen.getByTestId('modal-confirm'))
       
       await waitFor(() => {
         expect(screen.getByRole('alert')).toBeInTheDocument()
@@ -241,9 +255,9 @@ describe('NewsletterForm', () => {
       
       render(<NewsletterForm />)
       
-      await user.type(screen.getByLabelText(/email address/i), 'test@example.com')
-      await user.click(screen.getByRole('button', { name: /subscribe/i }))
-      await user.click(screen.getByTestId('modal-confirm'))
+await actType(user, screen.getByLabelText(/email address/i), 'test@example.com')
+await actClick(user, screen.getByRole('button', { name: /subscribe/i }))
+await actClick(user, screen.getByTestId('modal-confirm'))
       
       // Check for loading state
       await waitFor(() => {
@@ -264,10 +278,10 @@ describe('NewsletterForm', () => {
       
       render(<NewsletterForm />)
       
-      await user.type(screen.getByLabelText(/email address/i), 'test@example.com')
+await actType(user, screen.getByLabelText(/email address/i), 'test@example.com')
       const submitButton = screen.getByRole('button', { name: /subscribe/i })
-      await user.click(submitButton)
-      await user.click(screen.getByTestId('modal-confirm'))
+await actClick(user, submitButton)
+await actClick(user, screen.getByTestId('modal-confirm'))
       
       await waitFor(() => {
         expect(screen.getByRole('button', { name: /subscribing/i })).toBeDisabled()
@@ -282,11 +296,11 @@ describe('NewsletterForm', () => {
       const user = userEvent.setup()
       render(<NewsletterForm />)
       
-      await user.type(screen.getByLabelText(/email address/i), 'test@example.com')
-      await user.click(screen.getByRole('button', { name: /subscribe/i }))
+await actType(user, screen.getByLabelText(/email address/i), 'test@example.com')
+await actClick(user, screen.getByRole('button', { name: /subscribe/i }))
       
       // Cancel modal
-      await user.click(screen.getByTestId('modal-cancel'))
+await actClick(user, screen.getByTestId('modal-cancel'))
       
       expect(mockSubscribeToNewsletter).not.toHaveBeenCalled()
     })
@@ -295,10 +309,10 @@ describe('NewsletterForm', () => {
       const user = userEvent.setup()
       render(<NewsletterForm />)
       
-      await user.type(screen.getByLabelText(/email address/i), 'test@example.com')
-      await user.click(screen.getByRole('button', { name: /subscribe/i }))
+await actType(user, screen.getByLabelText(/email address/i), 'test@example.com')
+await actClick(user, screen.getByRole('button', { name: /subscribe/i }))
       
-      await user.click(screen.getByTestId('modal-cancel'))
+await actClick(user, screen.getByTestId('modal-cancel'))
       
       const modal = screen.getByTestId('consent-modal')
       expect(modal).toHaveAttribute('data-open', 'false')

@@ -10,6 +10,16 @@ interface StructuredDataProps {
 
 export function StructuredData({ data }: StructuredDataProps) {
   const json = Array.isArray(data) ? data : [data]
+
+  // Safely serialize JSON to prevent XSS by escaping characters that can break out of the script tag
+  const safeSerialize = (obj: Json) =>
+    JSON.stringify(obj)
+      .replace(/</g, "\\u003c")
+      .replace(/>/g, "\\u003e")
+      .replace(/&/g, "\\u0026")
+      .replace(/\u2028/g, "\\u2028")
+      .replace(/\u2029/g, "\\u2029")
+
   return (
     <>
       {json.map((item, idx) => (
@@ -17,7 +27,7 @@ export function StructuredData({ data }: StructuredDataProps) {
           key={idx}
           type="application/ld+json"
           // Avoid XSS by serializing safely
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(item) }}
+          dangerouslySetInnerHTML={{ __html: safeSerialize(item) }}
         />
       ))}
     </>
