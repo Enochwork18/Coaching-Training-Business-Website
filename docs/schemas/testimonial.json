@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ibasepo.org.uk/schemas/testimonial.json",
+  "title": "TestimonialSubmission",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "clientName": { "type": "string" },
+    "clientEmail": { "type": "string", "format": "email" },
+    "serviceName": { "type": ["string", "null" ] },
+    "rating": { "type": "integer", "minimum": 1, "maximum": 5 },
+    "testimonialText": { "type": "string", "minLength": 1 },
+    "isAnonymous": { "type": "boolean" },
+    "trap": { "type": "string", "description": "Honeypot field" }
+  },
+  "required": ["clientEmail", "rating", "testimonialText"]
+}

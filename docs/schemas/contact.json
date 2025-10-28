@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ibasepo.org.uk/schemas/contact.json",
+  "title": "ContactSubmission",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "name": { "type": "string", "minLength": 1 },
+    "email": { "type": "string", "format": "email" },
+    "phone": { "type": ["string", "null" ] },
+    "subject": { "type": "string", "minLength": 1 },
+    "message": { "type": "string", "minLength": 1 },
+    "website": { "type": "string", "description": "Honeypot field" }
+  },
+  "required": ["name", "email", "subject", "message"]
+}

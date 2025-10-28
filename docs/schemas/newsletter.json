@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ibasepo.org.uk/schemas/newsletter.json",
+  "title": "NewsletterSubscription",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "email": { "type": "string", "format": "email" },
+    "company": { "type": "string", "description": "Honeypot field" }
+  },
+  "required": ["email"]
+}

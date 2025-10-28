@@ -16,11 +16,18 @@ export function TestimonialSubmit() {
   const [anonymous, setAnonymous] = useState(false)
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState<string | null>(null)
+  const [trap, setTrap] = useState("")
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
     setMessage(null)
+
+    // Honeypot
+    if (trap.trim()) {
+      setLoading(false)
+      return
+    }
 
     try {
       const res = await submitTestimonial({
@@ -48,6 +55,8 @@ export function TestimonialSubmit() {
       <h2 className="font-heading text-3xl font-bold mb-4">Share Your Story</h2>
       <p className="text-muted-foreground mb-8">Your feedback helps others take the first step. Approved testimonials will appear publicly.</p>
       <form onSubmit={handleSubmit} className="space-y-4">
+        {/* Honeypot field */}
+        <input aria-hidden="true" className="hidden" tabIndex={-1} value={trap} onChange={(e) => setTrap(e.target.value)} placeholder="Leave empty" />
         <div className="grid md:grid-cols-2 gap-4">
           <div className="space-y-2">
             <Label htmlFor="name">Name</Label>

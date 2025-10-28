@@ -2,12 +2,14 @@
 
 import Link from "next/link"
 import { useState } from "react"
+import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { motion, AnimatePresence } from "framer-motion"
 
 export function SiteHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const pathname = usePathname()
 
   const navLinks = [
     { href: "/", label: "Home" },
@@ -32,7 +34,7 @@ export function SiteHeader() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-foreground/80 transition-colors hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+              className={`text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary ${pathname === link.href ? "text-primary" : "text-foreground/80 hover:text-primary"}`}
             >
               {link.label}
             </Link>
@@ -68,7 +70,7 @@ export function SiteHeader() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-sm font-medium text-foreground/80 hover:text-primary py-2"
+                  className={`text-sm font-medium py-2 ${pathname === link.href ? "text-primary" : "text-foreground/80 hover:text-primary"}`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.label}

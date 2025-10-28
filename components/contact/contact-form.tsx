@@ -20,6 +20,13 @@ export function ContactForm() {
     setMessage(null)
 
     const formData = new FormData(e.currentTarget)
+
+    // Honeypot check
+    if ((formData.get("website") as string)?.trim()) {
+      setLoading(false)
+      return
+    }
+
     const data = {
       name: formData.get("name"),
       email: formData.get("email"),
@@ -61,6 +68,8 @@ export function ContactForm() {
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Honeypot field to prevent spam */}
+          <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
           <div className="space-y-2">
             <Label htmlFor="name">Name *</Label>
             <Input id="name" name="name" required placeholder="Your full name" />

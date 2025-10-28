@@ -15,6 +15,7 @@ export function NewsletterForm() {
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
 
   const [consentOpen, setConsentOpen] = useState(false)
+  const [honeypot, setHoneypot] = useState("")
 
   const doSubscribe = async () => {
     setLoading(true)
@@ -37,12 +38,15 @@ export function NewsletterForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+    if (honeypot.trim()) return
     setConsentOpen(true)
   }
 
   return (
     <>
       <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md">
+        {/* Honeypot */}
+        <input type="text" name="company" className="hidden" aria-hidden="true" tabIndex={-1} value={honeypot} onChange={(e)=>setHoneypot(e.target.value)} />
         <Input
           type="email"
           placeholder="Enter your email"

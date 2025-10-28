@@ -63,6 +63,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${lato.variable} ${montserrat.variable} antialiased`} suppressHydrationWarning>
       <body className="font-sans bg-background text-foreground overflow-x-hidden" suppressHydrationWarning>
+        <div className="[&_[data-reduced-motion='true']_*]:!transition-none" />
         {/* Structured data scripts rendered server-side to avoid client import in layout */}
         <script
           type="application/ld+json"
