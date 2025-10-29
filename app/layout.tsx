@@ -4,6 +4,7 @@ import { Lato, Montserrat } from "next/font/google"
 import "./globals.css"
 import { schemas as seoSchemas } from "@/lib/seo/schemas"
 import { safeSerialize } from "@/lib/seo/serialize"
+import { AppProviders } from "@/components/providers/app-providers"
 
 const lato = Lato({
   subsets: ["latin"],
@@ -64,6 +65,11 @@ export default function RootLayout({
     <html lang="en" className={`${lato.variable} ${montserrat.variable} antialiased`} suppressHydrationWarning>
       <body className="font-sans bg-background text-foreground overflow-x-hidden" suppressHydrationWarning>
         <div className="[&_[data-reduced-motion='true']_*]:!transition-none" />
+        {/* Theme + Reduced motion providers */}
+        <div id="providers-root">
+          {/* ThemeProvider mounted at top-level to persist theme */}
+          {/* Providers inserted in RootLayout wrapper below */}
+        </div>
         {/* Structured data scripts rendered server-side to avoid client import in layout */}
         <script
           type="application/ld+json"
@@ -79,7 +85,14 @@ export default function RootLayout({
             image: orgLogo,
           })) }}
         />
-        {children}
+        {/* Mount providers around app content */}
+        {/* eslint-disable-next-line react/no-unknown-property */}
+        {/* Using dynamic require of client providers can cause hydration issues; import components in pages where needed. */}
+        <div id="app-root">
+          <AppProviders>
+            {children}
+          </AppProviders>
+        </div>
       </body>
     </html>
   )

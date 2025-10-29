@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Bell, User, LogOut } from "lucide-react"
+import { ThemeToggle } from "@/components/theme/theme-toggle"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,7 +22,8 @@ export function AdminHeader() {
           <span className="text-sm text-muted-foreground">Admin</span>
         </Link>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
           <Button variant="ghost" size="icon" aria-label="Notifications">
             <Bell className="h-5 w-5" />
           </Button>

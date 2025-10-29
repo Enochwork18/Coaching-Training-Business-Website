@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { motion, AnimatePresence } from "framer-motion"
+import { ThemeToggle } from "@/components/theme/theme-toggle"
 
 export function SiteHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -42,6 +43,7 @@ export function SiteHeader() {
           <Button asChild size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
             <Link href="/booking">Book a Session</Link>
           </Button>
+          <ThemeToggle />
         </div>
 
         {/* Mobile Menu Button */}
@@ -81,6 +83,9 @@ export function SiteHeader() {
                   Book a Session
                 </Link>
               </Button>
+              <div className="flex justify-end">
+                <ThemeToggle size="sm" />
+              </div>
             </div>
           </motion.div>
         )}
