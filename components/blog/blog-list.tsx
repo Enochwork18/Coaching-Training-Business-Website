@@ -1,118 +1,56 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { motion } from "framer-motion"
 import { Card, CardDescription, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Calendar, Clock, ArrowRight } from "lucide-react"
 import { Skeleton } from "@/components/ui/skeleton"
+import { BlogPost } from "@/lib/types"
+import { useSearchParams } from "next/navigation"
 
 export function BlogList() {
-  const [loading] = useState(false)
+  const [posts, setPosts] = useState<BlogPost[]>([])
+  const [loading, setLoading] = useState(true)
+  const [page, setPage] = useState(1)
+  const [total, setTotal] = useState(0)
+  const [limit] = useState(6)
 
-  // API Integration Point: GET /api/blog/posts
-  // Expected response: BlogPost[]
-  // Query params: ?page=1&limit=10&category=string&search=string
-  const posts = [
-    {
-      id: "1",
-      title: "5 Keys to Building Stronger Relationships",
-      slug: "5-keys-to-building-stronger-relationships",
-      excerpt:
-        "Discover the essential elements that create lasting, meaningful connections with the people who matter most in your life.",
-      image: "/couple-having-meaningful-conversation.jpg",
-      category: "Relationships",
-      publishedAt: "2024-01-15",
-      readTime: "5 min read",
-      featured: true,
-      author: {
-        name: "Dr. Adebayo Okonkwo",
-        avatar: "/professional-coach-headshot.jpg",
-      },
-    },
-    {
-      id: "2",
-      title: "Navigating Career Transitions with Confidence",
-      slug: "navigating-career-transitions-with-confidence",
-      excerpt:
-        "Learn how to approach career changes with clarity, purpose, and the confidence to pursue your professional goals.",
-      image: "/professional-at-crossroads.jpg",
-      category: "Career Development",
-      publishedAt: "2024-01-10",
-      readTime: "7 min read",
-      featured: false,
-      author: {
-        name: "Sarah Mitchell",
-        avatar: "/female-coach-headshot.jpg",
-      },
-    },
-    {
-      id: "3",
-      title: "The Power of Emotional Intelligence in Leadership",
-      slug: "power-of-emotional-intelligence-in-leadership",
-      excerpt:
-        "Explore how developing emotional intelligence can transform your leadership style and create more engaged, productive teams.",
-      image: "/leader-with-team.jpg",
-      category: "Leadership",
-      publishedAt: "2024-01-05",
-      readTime: "6 min read",
-      featured: false,
-      author: {
-        name: "James Rodriguez",
-        avatar: "/male-business-coach-headshot.jpg",
-      },
-    },
-    {
-      id: "4",
-      title: "Mindfulness Practices for Daily Life",
-      slug: "mindfulness-practices-for-daily-life",
-      excerpt:
-        "Simple, practical mindfulness techniques you can incorporate into your routine to reduce stress and increase presence.",
-      image: "/person-meditating-peacefully.jpg",
-      category: "Personal Growth",
-      publishedAt: "2024-01-01",
-      readTime: "4 min read",
-      featured: false,
-      author: {
-        name: "Dr. Adebayo Okonkwo",
-        avatar: "/professional-coach-headshot.jpg",
-      },
-    },
-    {
-      id: "5",
-      title: "Creating a Culture of Continuous Learning",
-      slug: "creating-culture-of-continuous-learning",
-      excerpt:
-        "How organizations can foster an environment where growth, development, and innovation become part of the DNA.",
-      image: "/team-learning-workshop.jpg",
-      category: "Organizational Development",
-      publishedAt: "2023-12-28",
-      readTime: "8 min read",
-      featured: false,
-      author: {
-        name: "James Rodriguez",
-        avatar: "/male-business-coach-headshot.jpg",
-      },
-    },
-    {
-      id: "6",
-      title: "Communication Strategies for Couples",
-      slug: "communication-strategies-for-couples",
-      excerpt:
-        "Effective communication techniques that can help couples navigate conflicts and deepen their emotional connection.",
-      image: "/couple-talking-openly.jpg",
-      category: "Relationships",
-      publishedAt: "2023-12-20",
-      readTime: "6 min read",
-      featured: false,
-      author: {
-        name: "Sarah Mitchell",
-        avatar: "/female-coach-headshot.jpg",
-      },
-    },
-  ]
+  const searchParams = useSearchParams()
+  const category = searchParams.get("category")
+  const search = searchParams.get("search")
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      setLoading(true)
+      const query = new URLSearchParams({
+        page: page.toString(),
+        limit: limit.toString(),
+      })
+      if (category) {
+        query.set("category", category)
+      }
+      if (search) {
+        query.set("search", search)
+      }
+
+      try {
+        const res = await fetch(`/api/blog/posts?${query.toString()}`)
+        const data = await res.json()
+        setPosts(data.posts)
+        setTotal(data.total)
+      } catch (error) {
+        console.error("Failed to fetch blog posts", error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchPosts()
+  }, [page, limit, category, search])
 
   if (loading) {
     return (
@@ -146,11 +84,12 @@ export function BlogList() {
         >
           <Card className="overflow-hidden hover:shadow-lg transition-shadow">
             <Link href={`/blog/${post.slug}`} className="grid md:grid-cols-3 gap-6">
-              <div className="aspect-video md:aspect-square overflow-hidden">
-                <img
+              <div className="aspect-video md:aspect-square overflow-hidden relative">
+                <Image
                   src={post.image || "/placeholder.svg"}
                   alt={post.title}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                  layout="fill"
+                  className="object-cover hover:scale-105 transition-transform duration-300"
                 />
               </div>
               <div className="md:col-span-2 p-6 flex flex-col justify-between">
@@ -165,10 +104,12 @@ export function BlogList() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4 text-sm text-muted-foreground">
                     <div className="flex items-center gap-2">
-                      <img
+                      <Image
                         src={post.author.avatar || "/placeholder.svg"}
                         alt={post.author.name}
-                        className="h-8 w-8 rounded-full object-cover"
+                        width={32}
+                        height={32}
+                        className="rounded-full object-cover"
                       />
                       <span>{post.author.name}</span>
                     </div>
@@ -192,18 +133,43 @@ export function BlogList() {
         </motion.div>
       ))}
 
+      {posts.length === 0 && !loading && (
+        <div className="text-center py-12">
+          <h2 className="text-2xl font-semibold mb-2">No posts found</h2>
+          <p className="text-muted-foreground">
+            Try adjusting your search or filters.
+          </p>
+        </div>
+      )}
+
       {/* Pagination */}
-      <div className="flex justify-center gap-2 pt-8">
-        <Button variant="outline" disabled>
-          Previous
-        </Button>
-        <Button variant="outline" className="bg-primary text-primary-foreground">
-          1
-        </Button>
-        <Button variant="outline">2</Button>
-        <Button variant="outline">3</Button>
-        <Button variant="outline">Next</Button>
-      </div>
+      {total > limit && (
+        <div className="flex justify-center gap-2 pt-8">
+          <Button
+            variant="outline"
+            onClick={() => setPage(page - 1)}
+            disabled={page === 1}
+          >
+            Previous
+          </Button>
+          {[...Array(Math.ceil(total / limit))].map((_, i) => (
+            <Button
+              key={i}
+              variant={page === i + 1 ? "default" : "outline"}
+              onClick={() => setPage(i + 1)}
+            >
+              {i + 1}
+            </Button>
+          ))}
+          <Button
+            variant="outline"
+            onClick={() => setPage(page + 1)}
+            disabled={page === Math.ceil(total / limit)}
+          >
+            Next
+          </Button>
+        </div>
+      )}
     </div>
   )
 }
