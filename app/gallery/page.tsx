@@ -1,5 +1,5 @@
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
+import { Header } from "@/components/layout/header"
+import { Footer } from "@/components/layout/footer"
 import { GalleryHero } from "@/components/gallery/gallery-hero"
 import { GalleryGrid } from "@/components/gallery/gallery-grid"
 
@@ -11,10 +11,10 @@ export const metadata = {
 export default function GalleryPage() {
   return (
     <main className="min-h-screen">
-      <SiteHeader />
+      <Header />
       <GalleryHero />
       <GalleryGrid />
-      <SiteFooter />
+      <Footer />
     </main>
   )
 }

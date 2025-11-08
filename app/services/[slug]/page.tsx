@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation"
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
+import { Header } from "@/components/layout/header"
+import { Footer } from "@/components/layout/footer"
 import { ServiceDetailHero } from "@/components/services/service-detail-hero"
 import { ServiceDetailContent } from "@/components/services/service-detail-content"
 import { ServiceCTA } from "@/components/services/service-cta"
@@ -83,11 +83,11 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
 
   return (
     <main className="min-h-screen">
-      <SiteHeader />
+      <Header />
       <ServiceDetailHero service={service} />
       <ServiceDetailContent service={service} />
       <ServiceCTA />
-      <SiteFooter />
+      <Footer />
     </main>
   )
 }

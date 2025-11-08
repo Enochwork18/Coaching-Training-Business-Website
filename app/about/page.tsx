@@ -1,5 +1,5 @@
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
+import { Header } from "@/components/layout/header"
+import { Footer } from "@/components/layout/footer"
 import { AboutHero } from "@/components/about/about-hero"
 import { MissionVision } from "@/components/about/mission-vision"
 import { TeamSection } from "@/components/about/team-section"
@@ -13,12 +13,12 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <main className="min-h-screen">
-      <SiteHeader />
+      <Header />
       <AboutHero />
       <MissionVision />
       <ApproachSection />
       <TeamSection />
-      <SiteFooter />
+      <Footer />
     </main>
   )
 }

@@ -1,5 +1,5 @@
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
+import { Header } from "@/components/layout/header"
+import { Footer } from "@/components/layout/footer"
 import { BookingHero } from "@/components/booking/booking-hero"
 import { BookingCalendly } from "@/components/booking/booking-calendly"
 import { BookingInfo } from "@/components/booking/booking-info"
@@ -12,9 +12,9 @@ export const metadata = {
 export default function BookingPage() {
   return (
     <main className="min-h-screen">
-      <SiteHeader />
+      <Header />
       <BookingHero />
-      <div className="py-20 md:py-32 bg-background">
+      <div className="py-20 md:py-32 bg-background-light">
         <div className="container-custom">
           <div className="grid lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2">
@@ -26,7 +26,7 @@ export default function BookingPage() {
           </div>
         </div>
       </div>
-      <SiteFooter />
+      <Footer />
     </main>
   )
 }

@@ -1,5 +1,5 @@
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
+import { Header } from "@/components/layout/header"
+import { Footer } from "@/components/layout/footer"
 import { TestimonialsHero } from "@/components/testimonials/testimonials-hero"
 import { TestimonialsGrid } from "@/components/testimonials/testimonials-grid"
 import { TestimonialsCTA } from "@/components/testimonials/testimonials-cta"
@@ -12,11 +12,11 @@ export const metadata = {
 export default function TestimonialsPage() {
   return (
     <main className="min-h-screen">
-      <SiteHeader />
+      <Header />
       <TestimonialsHero />
       <TestimonialsGrid />
       <TestimonialsCTA />
-      <SiteFooter />
+      <Footer />
     </main>
   )
 }

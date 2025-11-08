@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation"
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
+import { Header } from "@/components/layout/header"
+import { Footer } from "@/components/layout/footer"
 import { BlogPostHero } from "@/components/blog/blog-post-hero"
 import { BlogPostContent } from "@/components/blog/blog-post-content"
 import { BlogPostAuthor } from "@/components/blog/blog-post-author"
@@ -157,18 +157,15 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   return (
     <main className="min-h-screen">
-      <SiteHeader />
-      <BlogPostHero post={post} />
-      <div className="py-20 md:py-32 bg-background">
+      <Header />
+      <div className="py-20 md:py-32">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
             <BlogPostContent post={post} />
-            <BlogPostAuthor author={post.author} />
           </div>
         </div>
       </div>
-      <RelatedPosts currentPostId={post.id} category={post.category} />
-      <SiteFooter />
+      <Footer />
     </main>
   )
 }

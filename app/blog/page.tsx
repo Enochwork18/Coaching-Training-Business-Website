@@ -1,5 +1,5 @@
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
+import { Header } from "@/components/layout/header"
+import { Footer } from "@/components/layout/footer"
 import { BlogHero } from "@/components/blog/blog-hero"
 import { BlogList } from "@/components/blog/blog-list"
 import { BlogCategories } from "@/components/blog/blog-categories"
@@ -13,9 +13,9 @@ export const metadata = {
 export default function BlogPage() {
   return (
     <main className="min-h-screen">
-      <SiteHeader />
+      <Header />
       <BlogHero />
-      <div className="py-20 md:py-32 bg-background">
+      <div className="py-20 md:py-32 bg-background-light">
         <div className="container-custom">
           <div className="grid lg:grid-cols-4 gap-8">
             <div className="lg:col-span-3">
@@ -27,7 +27,7 @@ export default function BlogPage() {
           </div>
         </div>
       </div>
-      <SiteFooter />
+      <Footer />
     </main>
   )
 }
